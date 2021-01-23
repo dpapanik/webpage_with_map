@@ -1,0 +1,426 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+	 /*font: 13px/21px "HelveticaNeue", "Helvetica Neue", Helvetica, "Oxygen-Regular", Arial, sans-serif; */
+	/*font-family: 'Oxygen-Regular';*/
+	/*line-height: 130%;*/
+	/*background: #F0F0F0;*/
+	/*background-color:#F7F7F7;*/
+
+  /*min-height: 100%;*/
+  /*position:absolute;top:0px;left:0px;right:0px;bottom:0px;*/
+ }
+
+
+.slider {
+  width:100%;
+}
+
+/*Go to paternify to create pattern: http://www.patternify.com/*/
+/*See thread here: https://stackoverflow.com/questions/31428660/overlaying-a-transparent-background-on-an-embedded-video*/
+/*See example here: https://jsfiddle.net/kiirosora/36Lj4kxt/*/
+
+.videoContainer {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+  }
+  .videoContainer video {
+      width: 100%;
+      position: relative;
+      z-index: 1;
+  }
+  .videoContainer .overlay {
+      width: 100%;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      z-index: 2;
+      background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAHCAYAAAArkDztAAAAF0lEQVQYV2NkgID/DAwMjMhsFM6gkQAAt28OCJZrXz8AAAAASUVORK5CYII=) repeat;
+      opacity: 1;
+      line-height: 0; /*I have no idea why this works but without this, the overlay hatch bleeds out from the bottom margin*/
+  }
+
+
+ .container.wide {
+	  max-width:1200px;
+  }
+
+.container.fullwidth {
+  width: 100%;
+  max-width:93%;
+}
+
+.roundborder    {
+	border:1px solid #9A9A9A;
+	padding: 10px;
+	border-radius:4px;
+	-moz-border-radius:4px;
+}
+
+.card    {
+	box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+	padding-bottom: 5px;
+	margin-bottom: 20px;
+}
+
+/*.card p, .card h4    {
+	padding: 15px;
+}*/
+
+.padding {
+	padding: 10px;
+}
+
+.thumbnail .caption p{
+	font-size: 12px;
+	line-height: 1.2;
+	color: #5e5e5e;
+}
+
+.thumbnail .caption h4{
+	margin-top: 6px;
+	margin-bottom: 6px;
+	font-size: 18px;
+	line-height: 1;
+}
+
+img.scale-with-grid {
+	width: 100%; /*override existing setting*/
+}
+
+img.full-height {
+	height: 100%; /*override existing setting*/
+}
+
+img.grayscale {
+  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+}
+img.grayscale:hover {
+  -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(0%);
+}
+
+img.clipped-circle {
+	clip-path: circle(50%);
+}
+
+/*.filtered img{
+filter: url(#blue-wash);
+}*/
+
+/*.thumbnail img {
+  -webkit-filter: grayscale(100%); 
+  filter: grayscale(100%);
+}*/
+
+/*.thumbnail img {
+  filter: sepia(100%) hue-rotate(180deg) saturate(100%);
+}*/
+
+/*.thumbnail img:hover {
+  transition:all 300ms ease;
+  filter: grayscale(0%);
+  -webkit-transition:all 300ms ease;
+  -webkit-filter: grayscale(0%);
+}*/
+
+
+
+
+
+.blue img, img.blue {
+  filter: brightness(0.7) sepia(1) hue-rotate(160deg) saturate(1.5);
+}
+
+.blue img:hover {
+  transition:all 150ms ease;
+  filter: brightness(1) sepia(0) hue-rotate(0deg) saturate(1);
+}
+
+a img:hover	{
+	transition:all 150ms;
+	-webkit-transition:all 150ms;
+	opacity:0.7;
+}
+
+
+a:hover, a:focus {
+}
+a, a:visited {
+	text-decoration:none;
+}
+
+
+a {
+  color: #222; } /*#*/
+a:hover {
+  color: #33C3F0; }
+
+  a.emphasis {
+    color: #33C3F0; } /*#222*/
+
+
+
+
+
+
+
+
+/*MAIN PAGE NAVBAR STARTS*/
+nav ul {
+	list-style-type:none;
+	margin:0;
+	padding:0;
+}
+nav ul li {
+	display:inline;
+	padding-right: 8px;
+}
+nav a {
+	text-decoration: none;
+}
+/*MAIN PAGE NAVBAR ENDS*/
+
+
+
+
+/*EXPANDABLE NAVBAR HEADER STARTS*/
+
+#expandable_navbar_header {
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+#expandable_navbar_header ul {
+  font-size: 140%; 
+  line-height: 1.6
+}
+
+img.logo{
+	float: right; /*put the logo to the right*/
+	width: 25%; 
+	min-width: 140px; 
+	/*padding-top: 30px; 
+	padding-bottom: 30px;*/ /*the height of the logo together with the top/bottom paddings determines the height of the header*/
+}
+
+nav.expandable {
+	width: 60%;
+}
+
+nav.expandable i {
+	font-size:30px; /*size of the menu icon*/
+	padding-bottom: 20px; /*how far below the menu icon the actual drop-down menu list starts*/
+}
+
+nav.expandable ul {
+	list-style-type:none;
+}
+
+nav.expandable a {
+	text-decoration: none;
+}
+
+@media (max-width:550px){
+	nav.expandable {
+		position: static;
+		padding-top: 0px; /*how far from the top of the page the menu icon and the drop down list start*/
+	}
+	nav.expandable a.icon{
+		display: block; /*Although it does not make difference because the icon is hidden, this ensures that the drop down list is below the icon and not next to it*/
+	}
+	nav.expandable.expanded ul  {
+		display:block; /*This ensures that the drop down list is below the icon and not next to it*/
+	}
+	nav.expandable.expanded ul li {
+		display:block; /*this ensires that every item in the drop down list is placed after the other*/
+	}
+	nav.expandable ul  {
+		display:none; /*for widths below 550px the list is hidden by default unless the menu button is pressed*/
+	}
+}
+
+@media (min-width:550px){
+	nav.expandable {
+		position: absolute; /*the position must be absolute in order to stick it to the bottom of the header container div*/
+		bottom: 0%; /*stick it to the bottom of the header container div*/
+	}
+	nav.expandable a.icon{
+		display: none; /*hide the icon for widths above 550px*/
+	}
+	nav.expandable ul li {
+		display:inline-block; /* set display to either 'inline' or 'inline-block' to have the menu items next to each other*/
+	}
+}
+
+
+/*EXPANDABLE NAVBAR HEADER ENDS*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+#header h1 a:hover {
+  color: #222; }
+
+/* LISTS */
+.dl-horizontal dt {
+/*font-weight: bold;*/
+}
+.dl-horizontal dd {
+margin-bottom: 6px;
+}
+@media (min-width: 768px) {
+  .dl-horizontal dt {
+    float: left;
+    width: 70px;
+    overflow: hidden;
+    clear: left;
+    text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .dl-horizontal dd {
+    margin-left: 80px;
+  }
+  .dl-horizontal dd:before,
+  .dl-horizontal dd:after {
+    display: table;
+    content: " ";
+  }
+  .dl-horizontal dd:after {
+    clear: both;
+  }
+  .dl-horizontal dd:before,
+  .dl-horizontal dd:after {
+    display: table;
+    content: " ";
+  }
+  .dl-horizontal dd:after {
+    clear: both;
+  }
+}
+/* END LISTS */
+
+
+
+
+
+
+/*MODIFICATIONS*/
+
+.quarter-bottom-rel { margin-bottom: 4% !important; }
+.quarter-bottom { margin-bottom: 25px !important; }
+.half-bottom { margin-bottom: 50px !important; }
+.one-bottom, .add-bottom { margin-bottom: 100px !important; }
+.two-bottoms { margin-bottom: 200px !important; }
+
+
+.center{
+	text-align: center;
+}
+
+
+.animate-fading{animation:fading 1s }
+@keyframes fading {
+	0%{opacity:0}
+	100%{opacity:1}
+}
+
+.slide-caption {
+	background-color: black;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px;
+	padding-left: 20px;
+	padding-right: 20px;
+	font-size: 1.7rem; line-height: 1.6;  letter-spacing: 0;
+}
+
+
+.button.black{
+	color: #FFF;
+	background-color: black;
+	border-color: black;
+}
+
+
+
+
+
+
+
+
+
+
+/*DEPRECATED*/
+/*DEPRECATED*/
+/*DEPRECATED*/
+/*DEPRECATED*/
+
+
+/* Style the navbar */
+#navbar {
+  overflow: hidden;
+  background-color: black;
+  z-index: 5;
+}
+
+/* Navbar links */
+#navbar a {
+  /*float: left;*/
+  /*display: block;*/
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px;
+ /* padding-left: 20px;
+  padding-right: 20px;*/
+  text-decoration: none;
+  font-size: 1.7rem; line-height: 1.6;  letter-spacing: 0;
+}
+
+#navbar a:hover {
+	background-color: #555;
+	color: white;
+}
+
+
+#navbar.white {
+  background-color: white;
+}
+#navbar.white a {
+  color: black;
+}
+#navbar.white a:hover {
+	background-color: #555;
+	color: white;
+}
+
+/* The sticky class is added to the navbar with JS when it reaches its scroll position */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+
+.content {
+  padding: 16px;
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content {
+  padding-top: 60px;
+}
