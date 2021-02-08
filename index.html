@@ -30,6 +30,9 @@
   <!-- D3 -->
   <script src="https://d3js.org/d3.v4.min.js"></script>
 
+  <!-- Leaflet HeatMap -->
+  <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-heat/v0.1.3/leaflet-heat.js'></script>
+
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/favicon.png">
 
@@ -131,60 +134,53 @@
 
   <script>
 
-  L.mapbox.accessToken = 'pk.eyJ1IjoiZGltcCIsImEiOiJkRnlra3RjIn0.E9CTYzNUEx0yb3dcfV4SiA';
+  L.mapbox.accessToken = 'pk.eyJ1IjoiZWhlbGZyaWNoIiwiYSI6ImNra3Zhcmg5MDF1a3YycW55bmttcXA5NWEifQ.A1pr7k28x6Tf3--cUny6tA';
 
   var map_1 = L.mapbox.map('map_1')
-  .setView([40, -74.50], 9)
-  .addLayer(L.mapbox.styleLayer('mapbox://styles/dimp/citf6n01300692hmlxnnrv6wd'));
+  .setView([38.896653139857385, -77.03485808499167], 9)
+  .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10'));
   map_1
   .scrollWheelZoom.disable();
 
 
-  d3.json("https://api.citybik.es/v2/networks/ford-gobike", function(data) {
-    console.log(data);
+  d3.csv("data/202101-capitalbikeshare-tripdata.csv", function(data) {
+  console.log(data);
 
-    var map_2 = L.mapbox.map('map_2')
-    .setView([data.network.location.latitude, data.network.location.longitude], 10)
-    .addLayer(L.mapbox.styleLayer('mapbox://styles/dimp/citf6n01300692hmlxnnrv6wd'));
-    map_2
+  var map_2 = L.mapbox.map('map_2')
+    .setView([38.896653139857385, -77.03485808499167], 9)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10'));
+  map_2
     .scrollWheelZoom.disable();
 
-    data.network.stations.forEach(function(station){
-      station.lat = +station.latitude;
-      station.lng = +station.longitude;
-      var path_options = {
-        radius :  2,
-        color : d3.rgb(88,206,227).brighter(),
-        stroke: true,
-        weight : 1,
-      };
-      L.circleMarker([station.latitude, station.longitude], path_options).addTo(map_2);
-    });
+  data.forEach(function(row) {
+    row.start_lat = +row.start_lat;
+    row.start_lng = +row.start_lng;
+    var path_options = {
+      radius: 2,
+      color: d3.rgb(88, 206, 227).brighter(),
+      stroke: true,
+      weight: 1,
+    };
+    L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(map_2);
+  }
 
-    var map_3 = L.mapbox.map('map_3')
-    .setView([data.network.location.latitude, data.network.location.longitude], 11)
-    .addLayer(L.mapbox.styleLayer('mapbox://styles/dimp/ck9mf0x8q3o521iojo2qmmp52'));
-    map_3
+);
+
+  var map_3 = L.mapbox.map('map_3')
+    .setView([38.896653139857385, -77.03485808499167], 9)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10'));
+  map_3
     .scrollWheelZoom.disable();
 
-    data.network.stations.forEach(function(station){
-      station.lat = +station.latitude;
-      station.lng = +station.longitude;
-      var inventory_level = station.free_bikes / (station.free_bikes+station.empty_slots);
-      var path_options = {
-        radius :  0.14 * (station.free_bikes + station.empty_slots),
-        color : d3.rgb(88,206,227).brighter(),
-        fillColor : (function(){
-          return inventory_level > 0.5? d3.rgb(88,206,227) : d3.rgb(88,206,227).darker(2)
-        })(),
-        stroke: true,
-        weight : 1,
-        opacity : 1,
-        fillOpacity : 0.8
-      };
-      L.circleMarker([station.latitude, station.longitude], path_options).addTo(map_3);
-    });
-  });
+  var heat = L.heatLayer([], { maxZoom: 12 }).addTo(map_3);
+  data.forEach(function(row){
+    row.start_lat = +row.start_lat;
+    row.start_lng = +row.start_lng;
+    heat.addLatLng([row.start_lat, row.start_lng]);
+  }
+);
+
+});
 
 
 
