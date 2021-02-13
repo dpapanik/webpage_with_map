@@ -1,0 +1,25 @@
+1. Question
+  a. What areas are seeing the highest activity with the bike sharing system?
+2. Visualization
+  a. Heat Map
+3. Code
+  a. Month of data is too much.  Perhaps make it a weekly view
+4. Narrative
+
+
+
+Time series graph showing average number of pickups and drop offs over an entire month
+over a 24hr period (Weekdays)
+
+- Heat map with point travel arcs that changes by hour is an aggregate of Jan 2021
+  - JS change over time
+- Time series graph showing average number of pickups and drop offs over an entire month
+over a 24hr period (Weekdays)
+  - JS change over time
+  - Formatting
+    - Start time determines what day the ride occurred
+    - drop all data that occured on the weekend
+    - group by hour of start time
+    - sum of total rides / total number of weekdays in Jan
+  - In D3 and in the webpage
+- Generic conclusions from this these two
