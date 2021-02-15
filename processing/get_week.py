@@ -13,9 +13,9 @@ df = df.dropna()
 
 df["started_at"] = pd.to_datetime(df["started_at"])
 
-start_date = pd.to_datetime('1/03/2021 0:00')
-end_date = pd.to_datetime('1/09/2021 23:59')
+start_date = pd.to_datetime('1/04/2021 0:00')
+end_date = pd.to_datetime('1/04/2021 23:59')
 jan_1 = df[df["started_at"].between(start_date, end_date)]
 jan_1 = jan_1.sort_values('started_at')
 
-jan_1.to_csv("../data/jan_3-9_2021.csv")
+jan_1.to_csv("../data/jan_4_2021.csv")
