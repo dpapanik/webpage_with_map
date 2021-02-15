@@ -4,7 +4,7 @@
 
   <!-- Basic Page Needs–– -->
   <meta charset="utf-8">
-  <title>Your Project Title</title>
+  <title>DC Capital Bikeshare</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -89,9 +89,8 @@
         Something about 2 plots
       </h5>
       <div class="row">
-        <!--TODO: Get png images in row -->
-        <img src="img/Rplot1.png" alt="">
-        <img src="img/Rplot2.png" alt="">
+        <img class="six columns" src="img/Rplot1.png" alt="">
+        <img class="six columns" src="img/Rplot2.png" alt="">
       </div>
     </div>
   </div>
@@ -165,6 +164,23 @@
   map_2
     .scrollWheelZoom.disable();
 
+  d3.json('https://opendata.arcgis.com/datasets/a29b9dbb2f00459db2b0c3c56faca297_106.geojson', function(error, metro_json){
+    /* console.log(metro_json) */
+    L.geoJson(metro_json, {
+      style: function(feature) {
+          switch (feature.properties.NAME) {
+              case 'red': return {color: "#eb4034"};
+              case 'orange':   return {color: "#ffa600"};
+              case 'green':   return {color: "#05f535"};
+              case 'yellow':   return {color: "#f2ff00"};
+              case 'blue':   return {color: "#1c00f2"};
+              case 'silver':   return {color: "#C0C0C0"};
+          }
+      }
+    }).addTo(map_2);
+  })
+
+
   var heat = L.heatLayer([], { maxZoom: 12, max: 2, radius: 10 }).addTo(map_2);
   data.forEach(function(row){
     row.start_lat = +row.start_lat;
@@ -197,13 +213,13 @@ data.forEach(function(row){
       obj([row.start_lat, row.start_lng]),
       obj([row.end_lat, row.end_lng])
     );
-    console.log([row.start_lat, row.start_lng]);
-    console.log([row.end_lat, row.end_lng]);
+    /*console.log([row.start_lat, row.start_lng]);
+    console.log([row.end_lat, row.end_lng]);*/
     var line = generator.Arc(100, { offset: 10 });
     // Leaflet expects [lat,lng] arrays, but a lot of
     // software does the opposite, including arc.js, so
     // we flip here.
-    console.log(line.geometries[0].coords);
+    /*console.log(line.geometries[0].coords);*/
     var newLine = L.polyline(line.geometries[0].coords.map(function(c) {
         return c.reverse();
     }), {
@@ -230,7 +246,7 @@ data.forEach(function(row){
         };
     })(newLine._path), i * 100);
     i++;
-    console.log(i);
+    /*console.log(i);*/
   }
   catch(err) {
     console.log(err)
