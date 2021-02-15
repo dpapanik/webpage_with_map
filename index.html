@@ -229,6 +229,7 @@
         heat.addLatLng([row.start_lat, row.start_lng]);
       });
 
+      <!-- TODO: Remove Heat and make lines static -->
       var map_3 = L.mapbox.map('map_3')
         .setView([38.896653139857385, -77.03485808499167], 12)
         .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10'));
@@ -298,6 +299,7 @@
           i++;
           /*console.log(i);*/
         } catch (err) {
+          <!-- TODO: Remove lines causing errors -->
           console.log(err)
         }
       });
