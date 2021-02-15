@@ -139,7 +139,7 @@
   console.log(data);
 
   var map_1 = L.mapbox.map('map_1')
-    .setView([38.896653139857385, -77.03485808499167], 9)
+    .setView([38.896653139857385, -77.03485808499167], 12)
     .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10'));
   map_1
     .scrollWheelZoom.disable();
@@ -164,7 +164,7 @@
   map_2
     .scrollWheelZoom.disable();
 
-  d3.json('https://opendata.arcgis.com/datasets/a29b9dbb2f00459db2b0c3c56faca297_106.geojson', function(error, metro_json){
+  d3.json('https://opendata.arcgis.com/datasets/ead6291a71874bf8ba332d135036fbda_58.geojson', function(error, metro_json){
     /* console.log(metro_json) */
     L.geoJson(metro_json, {
       style: function(feature) {
