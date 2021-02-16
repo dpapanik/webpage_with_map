@@ -54,6 +54,14 @@
       color: #FFFFFF;
     }
 
+    h4 {
+      color: #FFFFFF;
+    }
+
+    h5 {
+      color: #FFFFFF;
+    }
+
     p {
       color: #FFFFFF;
     }
@@ -83,6 +91,10 @@
       COLOR: blue;
       TEXT-DECORATION: none;
       font-weight: none
+    }
+
+    ol {
+      color: #FFFFFF;
     }
   </style>
 
@@ -124,16 +136,19 @@
         assess the overall performance of the sharing bike system in Washington DC, and propose
         possible solutions to improve the efficiency of the whole system so as to enhance users
         experience. </p>
-      <b> What is Captial bikeshare? what kind of bikes? Docks or dockless? 3-4 sentences </b>
+      <h5>
+        What is Captial bikeshare?
+      </h5>
+      <b> What kind of bikes? Docks or dockless? 3-4 sentences </b>
     </div>
   </div>
 
   <div class="container one-bottom">
     <div class="twelve columns">
-      <h3>Location of Start of bike trips</h3>
+      <h3>One week visualized</h3>
       <p>
         The map shows clusters of trip start locations across Wasington DC for
-        the week of 1/3/21-1/9/21.  The biggest cluster can be seen near the
+        the week of 1/3/21-1/9/21. The biggest cluster can be seen near the
         capital building and other clusters are located around Arlington and
         near the Ronald Reagan Washington National Airport.
       </p>
@@ -168,54 +183,87 @@
 
   <div class="container one-bottom">
     <div class="twelve columns">
-      <h3>Heat Map and travel paths</h3>
-      <h5>
-        Somethign about it
-      </h5>
+      <h3>Heat Map</h3>
       <div class="row">
-        <div class="six columns">
-          <b> Heat map of trip starts between 1/3/2021 and 1/9/2021 with the DC metro lines overlayed on the map. </b>
-          <b> Look at how the points are clustering in certain areas around metro lines. Look at what could be in the areas that have large clusters, but no metro lines
-            Some points for further study:
-            How time of day is impacting start locations
-            Chart of average travel time for rides (perhaps someone can make this </b>
+        <b> Heat map of trip starts between 1/3/2021 and 1/9/2021 with the DC metro
+          lines overlayed on the map.
+        </b>
+        <div class="row">
+          <div id="map_2" class="twelve columns"></div>
         </div>
-        <div class="six columns">
-          <b> Animation of the straight lined path from trip starts to trip ends on January 3rd 2021. DC metro lines are overlayed on the map. </b>
+        <br>
+        <div class="row">
+          <p>
+            These maps show how the usage of bikes are influenced from the existing
+            DC metro lines. We see that there are hot spots following the <span style="color: #C0C0C0">Silver</span>
+            and <span style="color: #ffa600">Orange</span> metro lines into Arlington,
+            VA and following the <span style="color: #1c00f2">Blue</span> line
+            to the airport. We also see several hot spots that are not on metro lines.
+            These spots could provide some insight for future station locations.
+          </p>
         </div>
-      </div>
-      <div class="row">
-        <div id="map_2" class="six columns"></div>
-        <div id="map_3" class="six columns"></div>
       </div>
     </div>
   </div>
 
   <div class="container one-bottom">
     <div class="twelve columns">
-      <h3>Conclusion</h3>
-      <p>This analysis explores the bike sharing system visualized in Washington DC using data,
-        barcharts, heatmap and connection map. Our study has many findings. Firstly, the bike
-        pickups appear to be higher during the weekdays than during the weekends in January.
-        Second, the bikes are more used for short trips in dense urban areas (which can be
-        seen in the connection map with dense urban areas). For the longer trips beyond the
-        metropolitan area, and so few. Thirdly, bikes are used both for commuting and for
-        recreation. Finally, the use of shared bikes is seen in the city along the metro line, which
-        indicates that people choose to use bikes to ride to nearby metro stations and use bikes
-        to travel nearby after heading by metro from one part of the city to another. </p>
-      <b> Reiterate the question we want to ask, what visulizations and tehcniques will we use answer it.</b>
+      <h3>
+        Bike Trip Paths
+      </h3>
+      <div class="row">
+        <b> Animation of the straight lined path from trip starts to trip ends on
+          January 4th 2021. DC metro lines are overlayed on the map.
+        </b>
+      </div>
+      <div class="row">
+        <div id="map_3" class="twelve columns"></div>
+      </div>
+      <div class="row">
+        <p>
+          This map shows that most of the trips are clustered around the center of
+          Washington D.C. These trips are relatively short with only a few long
+          distance trips made to the outlying areas across its borders.  Most of
+          these cross border trips are following the existing metro lines.
+        </p>
+      </div>
     </div>
   </div>
 
   <div class="container one-bottom">
-    <h2>Team & Contributions</h2>
-    <h5>Be very clear about how each student in your team contributed to this project</h5>
-    <h3>Student A</h3>
-    <h5>Student A contributed to this, this, and that.</h5>
-    <h3>Student B</h3>
-    <h5>Student B contributed to this, this, and that.</h5>
-    <h3>Student C</h3>
-    <h5>Student C contributed to this, this, and that.</h5>
+    <div class="twelve columns">
+      <h3>
+        Future Questions
+      </h3>
+      <ol type="1">
+        <li>How does the time of day impact start locations and travel paths?</li>
+        <li>How are bike trips impacted by residential areas and existing bike
+          friendly infrastructure?
+        </li>
+        <li>Does the time of day impact the length of rides?</li>
+      </ol>
+      <h3>Conclusion</h3>
+      <p>
+        This analysis explores the bike sharing system visualized in Washington DC using data,
+        barcharts, heatmap and connection map. Our initial visulizations are helpful in providing
+        interesting first insights to the data from Capital Bikeshare.  They also provide several new
+        directions we can focus on because of the new questions they have shown us.  We hope to enhance our
+        analysis with new data and more visulizations in order for us to find new ways in improve the
+        efficiency of the bikeshare system.
+      </p>
+    </div>
+  </div>
+
+  <div class="container one-bottom">
+    <h3>Team & Contributions</h3>
+    <h4>Eric Helfrich</h4>
+    <p>Edited the HTML/CSS/Javascript and developed the mapbox visualizations</p>
+    <h4>Ling Xu</h4>
+    <p>Student B contributed to this, this, and that.</p>
+    <h4>Panick Kalambay Ilunga</h4>
+    <p>Student C contributed to this, this, and that.</p>
+    <h4>Khyati Patel</h4>
+    <p>Student C contributed to this, this, and that.</p>
   </div>
 
 
@@ -303,46 +351,46 @@
 
     d3.csv("data/jan_4_2021.csv", function(data) {
       /*TODO: Remove Heat and make lines static */
-        var map_3 = L.mapbox.map('map_3')
-          .setView([38.896653139857385, -77.03485808499167], 12)
-          .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10'));
+      var map_3 = L.mapbox.map('map_3')
+        .setView([38.896653139857385, -77.03485808499167], 12)
+        .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10'));
       map_3
         .scrollWheelZoom.disable();
 
       /* TODO: Get rid of duplicate json read */
-        d3.json('https://opendata.arcgis.com/datasets/ead6291a71874bf8ba332d135036fbda_58.geojson', function(error, metro_json) {
-          /* console.log(metro_json) */
-          L.geoJson(metro_json, {
-            style: function(feature) {
-              switch (feature.properties.NAME) {
-                case 'red':
-                  return {
-                    color: "#eb4034"
-                  };
-                case 'orange':
-                  return {
-                    color: "#ffa600"
-                  };
-                case 'green':
-                  return {
-                    color: "#05f535"
-                  };
-                case 'yellow':
-                  return {
-                    color: "#f2ff00"
-                  };
-                case 'blue':
-                  return {
-                    color: "#1c00f2"
-                  };
-                case 'silver':
-                  return {
-                    color: "#C0C0C0"
-                  };
-              }
+      d3.json('https://opendata.arcgis.com/datasets/ead6291a71874bf8ba332d135036fbda_58.geojson', function(error, metro_json) {
+        /* console.log(metro_json) */
+        L.geoJson(metro_json, {
+          style: function(feature) {
+            switch (feature.properties.NAME) {
+              case 'red':
+                return {
+                  color: "#eb4034"
+                };
+              case 'orange':
+                return {
+                  color: "#ffa600"
+                };
+              case 'green':
+                return {
+                  color: "#05f535"
+                };
+              case 'yellow':
+                return {
+                  color: "#f2ff00"
+                };
+              case 'blue':
+                return {
+                  color: "#1c00f2"
+                };
+              case 'silver':
+                return {
+                  color: "#C0C0C0"
+                };
             }
-          }).addTo(map_3);
-        })
+          }
+        }).addTo(map_3);
+      })
 
       // Transform the short [lat,lng] format in our
       // data into the {x, y} expected by arc.js.
@@ -397,7 +445,7 @@
           /*console.log(i);*/
         } catch (err) {
           /* TODO: Remove lines causing errors */
-            console.log(err)
+          console.log(err)
         }
       });
     });
