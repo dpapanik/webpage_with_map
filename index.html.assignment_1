@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Basic Page Needs–– -->
+  <meta charset="utf-8">
+  <title>DC Capital Bikeshare</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/customize.css">
+  <script src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
+  <link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
+  <style>
+    #map_1,
+    #map_2,
+    #map_3 {
+      height: 500px;
+    }
+
+    /*
+ * The path-start class is added to each line
+ * to manage its animation - this interpolates
+ * between the starting and ending values for the
+ * stroke-dashoffset css property
+ */
+    .path-start {
+      -webkit-transition: stroke-dashoffset 5s ease-in;
+      -moz-transition: stroke-dashoffset 5s ease-in;
+      -o-transition: stroke-dashoffset 5s ease-in;
+      transition: stroke-dashoffset 5s ease-in;
+    }
+
+    body {
+      background-color: #121212;
+    }
+
+    h2 {
+      color: #FFFFFF;
+    }
+
+    h3 {
+      color: #FFFFFF;
+    }
+
+    h4 {
+      color: #FFFFFF;
+    }
+
+    h5 {
+      color: #FFFFFF;
+    }
+
+    p {
+      color: #FFFFFF;
+    }
+
+    b {
+      color: #FFFFFF;
+    }
+
+    A:link {
+      COLOR: white;
+      TEXT-DECORATION: none;
+      font-weight: normal
+    }
+
+    A:visited {
+      COLOR: purple;
+      TEXT-DECORATION: none;
+      font-weight: normal
+    }
+
+    A:active {
+      COLOR: white;
+      TEXT-DECORATION: none
+    }
+
+    A:hover {
+      COLOR: blue;
+      TEXT-DECORATION: none;
+      font-weight: none
+    }
+
+    ol {
+      color: #FFFFFF;
+    }
+  </style>
+
+  <!-- D3 -->
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+
+  <!-- Leaflet HeatMap -->
+  <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-heat/v0.1.3/leaflet-heat.js'></script>
+
+  <!-- arc.js to make paths curved -->
+  <script src='https://api.mapbox.com/mapbox.js/plugins/arc.js/v0.1.0/arc.js'></script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+
+<body>
+
+  <div class="container one-bottom" style="margin-top: 50px">
+    <div class="ten columns">
+      <h2>Mobility on Demand Systems: Data-Driven Analysis, Simulation, Visualization</h2>
+      <p>
+        ARCH 6306/6050, DSBA 6010, ITIS 8010/6010: Wednesdays 6pm-8:30pm, Taught Online
+        <br>
+        Dr. Dimitris Papanikolaou | dpapanik@uncc.edu | Urban Synergetics Lab | https://urbansynergeticslab.net
+      </p>
+    </div>
+    <div class="two columns">
+      <a href="https://urbansynergeticslab.net/"><img class="scale-with-grid" src="img/LabLogo_dark_cropped.png" style="background-color:white"></a>
+    </div>
+    <div class="twelve columns">
+      <h3>Introduction</h3>
+      <p>
+        This webpage is providing visualized information about the bike sharing system in Washington
+        DC. Capital Bikeshare is the provider of the bike-sharing service in the city. It currently owns
+        4500+ bikes and 596 stations across 7 jurisdictions in the US. The data was captured from its
+        website <a href="https://www.capitalbikeshare.com"> https://www.capitalbikeshare.com</a>.The data includes several layers of information such
+        as: the bike ID, time and location of the start and the end of each ride, the user’s membership
+        condition(member or casual), and the bike type(electric, classic, or docked).
+        By analyzing and visualizing those data, we are trying to answer questions such as: How the
+        demand for bikes in DC changes during a normal weekday on an hourly basis; From where
+        most bike rides usually start; What destination the bike users are usually travelling to. The final
+        goal of this analysis is to assess the overall performance of the sharing bike system in
+        Washington DC, and propose possible solutions to improve the efficiency of the whole system
+        so as to enhance users experience.
+      </p>
+    </div>
+  </div>
+
+  <div class="container one-bottom">
+    <div class="twelve columns">
+      <h3>One week visualized</h3>
+      <p>
+        The map shows clusters of trip start locations across Wasington DC for
+        the week of 1/3/21-1/9/21. The biggest cluster can be seen near the
+        capital building and other clusters are located around Arlington and
+        near the Ronald Reagan Washington National Airport.
+      </p>
+      <div id="map_1" class="one-bottom"></div>
+    </div>
+  </div>
+
+  <div class="container one-bottom">
+    <div class="twelve columns">
+      <h3>Hourly Average of pickups over one week</h3>
+      <p>
+        The number of daily pickups during weekdays dropped from 9 a.m. to 10 a.m. before stepping up and reaching the peak at 5 p.m.
+      </p>
+      <div class="row">
+        <img src="img/Rplot1.png" alt="">
+        <p>
+          The number of daily pickups for the week increased gradually from 5 a.m. to 4 p.m..
+        </p>
+        <img src="img/Rplot2.png" alt="">
+        <p style="color: red">
+          The afternoon peaks are the greatest. The capital bikeshare system should meet the demand particularly from 12 p.m. to 5 p.m. by making bikes and docks available.
+        </p>
+        <p>
+          The average duration of trips is <span style="color:red">14 min 45 s </span> and about <span style="color:red">67%</span> of users are Capital Bikeshare members.
+        </p>
+        <p>
+          A range of 11 to 2674 pickups per hour is registered around the 596 stations.
+        </p>
+        <p>
+          Saturday has the highest average number of pickups, about 915 a day, representing almost two times the number recorded on Monday.
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container one-bottom">
+    <div class="twelve columns">
+      <h3>Heat Map</h3>
+      <div class="row">
+        <b> Heat map of trip starts between 1/3/2021 and 1/9/2021 with the DC metro
+          lines overlayed on the map.
+        </b>
+        <div class="row">
+          <div id="map_2" class="twelve columns"></div>
+        </div>
+        <br>
+        <div class="row">
+          <p>
+            These maps show how the usage of bikes are influenced from the existing
+            DC metro lines. We see that there are hot spots following the <span style="color: #C0C0C0">Silver</span>
+            and <span style="color: #ffa600">Orange</span> metro lines into Arlington,
+            VA and following the <span style="color: #1c00f2">Blue</span> line
+            to the airport. We also see several hot spots that are not on metro lines.
+            These spots could provide some insight for future station locations.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container one-bottom">
+    <div class="twelve columns">
+      <h3>
+        Bike Trip Paths
+      </h3>
+      <div class="row">
+        <b> Animation of the straight lined path from trip starts to trip ends on
+          January 4th 2021. DC metro lines are overlayed on the map.
+        </b>
+      </div>
+      <div class="row">
+        <div id="map_3" class="twelve columns"></div>
+      </div>
+      <div class="row">
+        <p>
+          This map shows that most of the trips are clustered around the center of
+          Washington D.C. These trips are relatively short with only a few long
+          distance trips made to the outlying areas across its borders. Most of
+          these cross border trips are following the existing metro lines.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container one-bottom">
+    <div class="twelve columns">
+      <h3>Conclusion</h3>
+      <p>
+        This analysis explores the bike sharing system visualized in Washington DC using data,
+        barcharts, heatmap and connection map. Our initial visulizations are helpful in providing
+        interesting first insights to the data from Capital Bikeshare. They also provide several new
+        directions we can focus on because of the new questions they have shown us. We hope to enhance our
+        analysis with new data and more visulizations in order for us to find new ways in improve the
+        efficiency of the bikeshare system.
+      </p>
+      <h3>
+        Future Questions
+      </h3>
+      <ol type="1">
+        <li>How does the time of day impact start locations and travel paths?</li>
+        <li>How are bike trips impacted by residential areas and existing bike
+          friendly infrastructure?
+        </li>
+        <li>Does the time of day impact the length of rides?</li>
+        <li>How to induce trips or increase the use of bikes?</li>
+        <li>What is the average duration of trips based on member types (registered & casual members)?</li>
+        <li>At which stations they mostly commute to/from?</li>
+        <li>If needed, where should the network be expanded to ensure customer use and satisfaction?</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="container one-bottom">
+    <h3>Team & Contributions</h3>
+    <h4>Eric Helfrich</h4>
+    <p>Edited the HTML/CSS/Javascript and developed the mapbox visualizations. Edited the descriptions and cleaned data for use JavaScript.</p>
+    <h4>Ling Xu</h4>
+    <p>Introduction and page layout ideas</p>
+    <h4>Panick Kalambay Ilunga</h4>
+    <p>clean and made the statistical computing & graphics (bar plots), edited the HTML JavaScript related to that section, and came up with some future questions we may address.</p>
+    <h4>Khyati Patel</h4>
+    <p>Description to maps, conclusion, and page layout ideas.</p>
+  </div>
+
+
+
+
+
+  <script>
+    L.mapbox.accessToken = 'pk.eyJ1IjoiZWhlbGZyaWNoIiwiYSI6ImNra3Zhcmg5MDF1a3YycW55bmttcXA5NWEifQ.A1pr7k28x6Tf3--cUny6tA';
+
+    d3.csv("data/jan_3-9_2021.csv", function(data) {
+      console.log(data);
+
+      var map_1 = L.mapbox.map('map_1')
+        .setView([38.896653139857385, -77.03485808499167], 12)
+        .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10'));
+      map_1
+        .scrollWheelZoom.disable();
+
+      data.forEach(function(row) {
+          row.start_lat = +row.start_lat;
+          row.start_lng = +row.start_lng;
+          var path_options = {
+            radius: 2,
+            color: d3.rgb(3, 252, 3).brighter(),
+            stroke: true,
+            weight: 1,
+          };
+          L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(map_1);
+        }
+
+      );
+
+      var map_2 = L.mapbox.map('map_2')
+        .setView([38.896653139857385, -77.03485808499167], 12)
+        .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10'));
+      map_2
+        .scrollWheelZoom.disable();
+
+      d3.json('https://opendata.arcgis.com/datasets/ead6291a71874bf8ba332d135036fbda_58.geojson', function(error, metro_json) {
+        /* console.log(metro_json) */
+        L.geoJson(metro_json, {
+          style: function(feature) {
+            switch (feature.properties.NAME) {
+              case 'red':
+                return {
+                  color: "#eb4034"
+                };
+              case 'orange':
+                return {
+                  color: "#ffa600"
+                };
+              case 'green':
+                return {
+                  color: "#05f535"
+                };
+              case 'yellow':
+                return {
+                  color: "#f2ff00"
+                };
+              case 'blue':
+                return {
+                  color: "#1c00f2"
+                };
+              case 'silver':
+                return {
+                  color: "#C0C0C0"
+                };
+            }
+          }
+        }).addTo(map_2);
+      })
+
+
+      var heat = L.heatLayer([], {
+        maxZoom: 12,
+        max: 2,
+        radius: 10
+      }).addTo(map_2);
+      data.forEach(function(row) {
+        row.start_lat = +row.start_lat;
+        row.start_lng = +row.start_lng;
+        heat.addLatLng([row.start_lat, row.start_lng]);
+      });
+    });
+
+    d3.csv("data/jan_4_2021.csv", function(data) {
+      /*TODO: Remove Heat and make lines static */
+      var map_3 = L.mapbox.map('map_3')
+        .setView([38.896653139857385, -77.03485808499167], 12)
+        .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10'));
+      map_3
+        .scrollWheelZoom.disable();
+
+      /* TODO: Get rid of duplicate json read */
+      d3.json('https://opendata.arcgis.com/datasets/ead6291a71874bf8ba332d135036fbda_58.geojson', function(error, metro_json) {
+        /* console.log(metro_json) */
+        L.geoJson(metro_json, {
+          style: function(feature) {
+            switch (feature.properties.NAME) {
+              case 'red':
+                return {
+                  color: "#eb4034"
+                };
+              case 'orange':
+                return {
+                  color: "#ffa600"
+                };
+              case 'green':
+                return {
+                  color: "#05f535"
+                };
+              case 'yellow':
+                return {
+                  color: "#f2ff00"
+                };
+              case 'blue':
+                return {
+                  color: "#1c00f2"
+                };
+              case 'silver':
+                return {
+                  color: "#C0C0C0"
+                };
+            }
+          }
+        }).addTo(map_3);
+      })
+
+      // Transform the short [lat,lng] format in our
+      // data into the {x, y} expected by arc.js.
+      function obj(ll) {
+        return {
+          x: ll[1],
+          y: ll[0]
+        };
+      }
+      i = 0;
+      data.forEach(function(row) {
+        try {
+          var generator = new arc.GreatCircle(
+            obj([row.start_lat, row.start_lng]),
+            obj([row.end_lat, row.end_lng])
+          );
+          /*console.log([row.start_lat, row.start_lng]);
+          console.log([row.end_lat, row.end_lng]);*/
+          var line = generator.Arc(100, {
+            offset: 10
+          });
+          // Leaflet expects [lat,lng] arrays, but a lot of
+          // software does the opposite, including arc.js, so
+          // we flip here.
+          /*console.log(line.geometries[0].coords);*/
+          var newLine = L.polyline(line.geometries[0].coords.map(function(c) {
+              return c.reverse();
+            }), {
+              color: '#fff',
+              weight: 1,
+              opacity: 0.5
+            })
+            .addTo(map_3);
+          var totalLength = newLine._path.getTotalLength();
+          newLine._path.classList.add('path-start');
+          // This pair of CSS properties hides the line initially
+          // See http://css-tricks.com/svg-line-animation-works/
+          // for details on this trick.
+          newLine._path.style.strokeDashoffset = totalLength;
+          newLine._path.style.strokeDasharray = totalLength;
+          // Offset the timeout here: setTimeout makes a function
+          // run after a certain number of milliseconds - in this
+          // case we want each flight path to be staggered a bit.
+          setTimeout((function(path) {
+            return function() {
+              // setting the strokeDashoffset to 0 triggers
+              // the animation.
+              path.style.strokeDashoffset = 0;
+            };
+          })(newLine._path), i * 100);
+          i++;
+          /*console.log(i);*/
+        } catch (err) {
+          /* TODO: Remove lines causing errors */
+          console.log(err)
+        }
+      });
+    });
+  </script>
+
+
+</body>
+
+</html>

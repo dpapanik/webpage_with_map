@@ -1,25 +1,41 @@
-1. Question
-  a. What areas are seeing the highest activity with the bike sharing system?
-2. Visualization
-  a. Heat Map
-3. Code
-  a. Month of data is too much.  Perhaps make it a weekly view
-4. Narrative
+1 week (Feb 28 - March 6)
 
+Intro
 
+How does time impact length of ride?
+- 4 histograms (weekday vs weekend)
+  - X axis: hours of the day 0-23
+  - Y axis: Miles or length in minutes
+- Findings
 
-Time series graph showing average number of pickups and drop offs over an entire month
-over a 24hr period (Weekdays)
+How does time impact start/end locations
+- Morning commute (6-10am)
+  - Chord Graph from start locations to end locations (Cluster?)
+  - Animated path + Heat (start locations)
+- Evening commute (5-7pm)
+  - Chord Graph from start locations to end locations (Cluster?)
+  - Animated path + Heat (start locations)
+- After work Travel (7pm-2am)
+  - Chord Graph from start locations to end locations (Cluster?)
+  - Animated path + Heat (start locations)
+- Weekends
+  - Chord Graph from start locations to end locations (Cluster?)
+  - Animated path + Heat (start locations)
+- Findings
 
-- Heat map with point travel arcs that changes by hour is an aggregate of Jan 2021
-  - JS change over time
-- Time series graph showing average number of pickups and drop offs over an entire month
-over a 24hr period (Weekdays)
-  - JS change over time
-  - Formatting
-    - Start time determines what day the ride occurred
-    - drop all data that occured on the weekend
-    - group by hour of start time
-    - sum of total rides / total number of weekdays in Jan
-  - In D3 and in the webpage
-- Generic conclusions from this these two
+Conclusion
+
+Chord Graph Matrix
+Each row is a group (station ID)
+Row to column (1,2) -> from station 1 to station 2.
+(2,1) -> from station 2 to station 1
+Square Matrix in the end
+
+TO DO:
+https://ehelfrich.github.io/DC-Capital-bikeshare/
+https://www.d3-graph-gallery.com/graph/chord_basic.html
+- Meet 8:30am - 12pm Saturday
+- Eric: Create Matrix / Data file for animated paths
+- Khyati: Research Chord Graph
+- Panick: Research D3 Histogram (format in R)
+- Ling: Research HTML format

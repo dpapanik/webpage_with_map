@@ -23,11 +23,12 @@
   <script src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
   <link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
   <style>
-    #map_1,
-    #map_2,
-    #map_3 {
-      height: 500px;
-    }
+    #morning_commute_map,
+    #evening_commute_map,
+    #after_work_commute_map,
+    #weekend_commute_map {
+    height: 500px;
+  }
 
     /*
  * The path-start class is added to each line
@@ -42,6 +43,20 @@
       transition: stroke-dashoffset 5s ease-in;
     }
 
+    /*****D3 Barplot CSS modifications ******/
+    .myaxis path {
+      stroke: #FFFFFF;
+    }
+
+    .tick line {
+      stroke: #FFFFFF
+    }
+
+    .tick text {
+      fill: #FFFFFF
+    }
+
+    /*****End D3 Barplot CSS modifications *****/
     body {
       background-color: #121212;
     }
@@ -51,7 +66,7 @@
     }
 
     h3 {
-      color: #FFFFFF;
+      color: #ffffff;
     }
 
     h4 {
@@ -124,7 +139,8 @@
       </p>
     </div>
     <div class="two columns">
-      <a href="https://urbansynergeticslab.net/"><img class="scale-with-grid" src="img/LabLogo_dark_cropped.png" style="background-color:white"></a>
+      <a href="https://urbansynergeticslab.net/"><img class="scale-with-grid" src="img/img_1600/usl_logo_white_transparent.png"
+          style="background-color:#121212"></a>
     </div>
     <div class="twelve columns">
       <h3>Introduction</h3>
@@ -132,7 +148,8 @@
         This webpage is providing visualized information about the bike sharing system in Washington
         DC. Capital Bikeshare is the provider of the bike-sharing service in the city. It currently owns
         4500+ bikes and 596 stations across 7 jurisdictions in the US. The data was captured from its
-        website <a href="https://www.capitalbikeshare.com"> https://www.capitalbikeshare.com</a>.The data includes several layers of information such
+        website <a href="https://www.capitalbikeshare.com"> https://www.capitalbikeshare.com</a>.The data includes
+        several layers of information such
         as: the bike ID, time and location of the start and the end of each ride, the user’s membership
         condition(member or casual), and the bike type(electric, classic, or docked).
         By analyzing and visualizing those data, we are trying to answer questions such as: How the
@@ -147,91 +164,47 @@
 
   <div class="container one-bottom">
     <div class="twelve columns">
-      <h3>One week visualized</h3>
+      <h3>How does time impact length of the ride?</h3>
+      <!-- Create Barplot -->
+      <div id="distance_plot"></div>
+      <div id="time_plot"></div>
       <p>
-        The map shows clusters of trip start locations across Wasington DC for
-        the week of 1/3/21-1/9/21. The biggest cluster can be seen near the
-        capital building and other clusters are located around Arlington and
-        near the Ronald Reagan Washington National Airport.
+        ...
       </p>
-      <div id="map_1" class="one-bottom"></div>
-    </div>
-  </div>
-
-  <div class="container one-bottom">
-    <div class="twelve columns">
-      <h3>Hourly Average of pickups over one week</h3>
-      <p>
-        The number of daily pickups during weekdays dropped from 9 a.m. to 10 a.m. before stepping up and reaching the peak at 5 p.m.
-      </p>
-      <div class="row">
-        <img src="img/Rplot1.png" alt="">
-        <p>
-          The number of daily pickups for the week increased gradually from 5 a.m. to 4 p.m..
-        </p>
-        <img src="img/Rplot2.png" alt="">
-        <p style="color: red">
-          The afternoon peaks are the greatest. The capital bikeshare system should meet the demand particularly from 12 p.m. to 5 p.m. by making bikes and docks available.
-        </p>
-        <p>
-          The average duration of trips is <span style="color:red">14 min 45 s </span> and about <span style="color:red">67%</span> of users are Capital Bikeshare members.
-        </p>
-        <p>
-          A range of 11 to 2674 pickups per hour is registered around the 596 stations.
-        </p>
-        <p>
-          Saturday has the highest average number of pickups, about 915 a day, representing almost two times the number recorded on Monday.
-        </p>
-      </div>
+      <h4>
+        Findings
+      </h4>
     </div>
   </div>
 
 
   <div class="container one-bottom">
     <div class="twelve columns">
-      <h3>Heat Map</h3>
+      <h3>How does time impact start/end locations?</h3>
+      <p>Legend: ...</p>
+      <h4>Morning Commute</h4>
+      <p>Text about how data was found</p>
       <div class="row">
-        <b> Heat map of trip starts between 1/3/2021 and 1/9/2021 with the DC metro
-          lines overlayed on the map.
-        </b>
-        <div class="row">
-          <div id="map_2" class="twelve columns"></div>
-        </div>
-        <br>
-        <div class="row">
-          <p>
-            These maps show how the usage of bikes are influenced from the existing
-            DC metro lines. We see that there are hot spots following the <span style="color: #C0C0C0">Silver</span>
-            and <span style="color: #ffa600">Orange</span> metro lines into Arlington,
-            VA and following the <span style="color: #1c00f2">Blue</span> line
-            to the airport. We also see several hot spots that are not on metro lines.
-            These spots could provide some insight for future station locations.
-          </p>
-        </div>
+        <div id="morning_commute_map" class="six columns"></div>
+        <div id="morning_chord" class="six columns"></div>
       </div>
-    </div>
-  </div>
-
-  <div class="container one-bottom">
-    <div class="twelve columns">
-      <h3>
-        Bike Trip Paths
-      </h3>
+      <br>
+      <h4>Evening Commute</h4>
       <div class="row">
-        <b> Animation of the straight lined path from trip starts to trip ends on
-          January 4th 2021. DC metro lines are overlayed on the map.
-        </b>
+        <div id="evening_commute_map" class="six columns"></div>
+        <div id="evening_chord" class="six columns"></div>
       </div>
+      <br>
+      <h4>After Work Hours</h4>
       <div class="row">
-        <div id="map_3" class="twelve columns"></div>
+        <div id="after_work_commute_map" class="six columns"></div>
+        <div id="after_work_chord" class="six columns"></div>
       </div>
+      <br>
+      <h4>Weekend</h4>
       <div class="row">
-        <p>
-          This map shows that most of the trips are clustered around the center of
-          Washington D.C. These trips are relatively short with only a few long
-          distance trips made to the outlying areas across its borders. Most of
-          these cross border trips are following the existing metro lines.
-        </p>
+        <div id="weekend_commute_map" class="six columns"></div>
+        <div id="weekend_chord" class="six columns"></div>
       </div>
     </div>
   </div>
@@ -240,38 +213,21 @@
     <div class="twelve columns">
       <h3>Conclusion</h3>
       <p>
-        This analysis explores the bike sharing system visualized in Washington DC using data,
-        barcharts, heatmap and connection map. Our initial visulizations are helpful in providing
-        interesting first insights to the data from Capital Bikeshare. They also provide several new
-        directions we can focus on because of the new questions they have shown us. We hope to enhance our
-        analysis with new data and more visulizations in order for us to find new ways in improve the
-        efficiency of the bikeshare system.
+        Add Conclusion!
       </p>
-      <h3>
-        Future Questions
-      </h3>
-      <ol type="1">
-        <li>How does the time of day impact start locations and travel paths?</li>
-        <li>How are bike trips impacted by residential areas and existing bike
-          friendly infrastructure?
-        </li>
-        <li>Does the time of day impact the length of rides?</li>
-        <li>How to induce trips or increase the use of bikes?</li>
-        <li>What is the average duration of trips based on member types (registered & casual members)?</li>
-        <li>At which stations they mostly commute to/from?</li>
-        <li>If needed, where should the network be expanded to ensure customer use and satisfaction?</li>
-      </ol>
     </div>
   </div>
 
   <div class="container one-bottom">
     <h3>Team & Contributions</h3>
     <h4>Eric Helfrich</h4>
-    <p>Edited the HTML/CSS/Javascript and developed the mapbox visualizations. Edited the descriptions and cleaned data for use JavaScript.</p>
+    <p>Edited the HTML/CSS/Javascript and developed the mapbox visualizations. Edited the descriptions and cleaned data
+      for use JavaScript.</p>
     <h4>Ling Xu</h4>
     <p>Introduction and page layout ideas</p>
     <h4>Panick Kalambay Ilunga</h4>
-    <p>clean and made the statistical computing & graphics (bar plots), edited the HTML JavaScript related to that section, and came up with some future questions we may address.</p>
+    <p>clean and made the statistical computing & graphics (bar plots), edited the HTML JavaScript related to that
+      section, and came up with some future questions we may address.</p>
     <h4>Khyati Patel</h4>
     <p>Description to maps, conclusion, and page layout ideas.</p>
   </div>
@@ -281,129 +237,525 @@
 
 
   <script>
+
     L.mapbox.accessToken = 'pk.eyJ1IjoiZWhlbGZyaWNoIiwiYSI6ImNra3Zhcmg5MDF1a3YycW55bmttcXA5NWEifQ.A1pr7k28x6Tf3--cUny6tA';
 
-    d3.csv("data/jan_3-9_2021.csv", function(data) {
-      console.log(data);
+    /*
+    * Distance Barplot
+    */
+    d3.csv("data/distance_matrix.csv", function (distance_data) {
+      // set the dimensions and margins of the graph
+      var margin = { top: 30, right: 10, bottom: 70, left: 50 },
+        width = 860 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom;
 
-      var map_1 = L.mapbox.map('map_1')
+      // append the svg object to the body of the page
+      var svg = d3.select("#distance_plot")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+      // X axis
+      var x = d3.scaleBand()
+        .range([0, width])
+        .domain(distance_data.map(function (d) { return d.group; }))
+        .padding(0.3);
+      svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .attr("class", "myaxis")
+        .call(d3.axisBottom(x));
+
+      // Add X axis label:
+      svg.append("text")
+        .attr("text-anchor", "end")
+        .attr("x", width - 325)
+        .attr("y", height + margin.top + 10)
+        .style('fill', 'white')
+        .text("Time of the day [h]");
+
+      // Add Y axis
+      var y = d3.scaleLinear()
+        .domain([0, 6000])
+        .range([height, 0]);
+      svg.append("g")
+        .attr("class", "myaxis")
+        .call(d3.axisLeft(y));
+
+      // Y axis label:
+      svg.append("text")
+        .attr("text-anchor", "end")
+        .attr("transform", "rotate(-90)")
+        .attr("y", - margin.left + 11)
+        .attr("x", - margin.top - 10)
+        .style('fill', 'white')
+        .text("Average distance of the Ride [km]");
+
+      // A function that create / update the plot for a given variable:
+      function update(data) {
+        var u = svg.selectAll("rect")
+          .data(data)
+
+        u
+          .enter()
+          .append("rect")
+          .merge(u)
+          .transition()
+          .duration(1000)
+          .attr("x", function (d) { return x(d.group); })
+          .attr("y", function (d) { return y(d.value); })
+          .attr("width", x.bandwidth())
+          .attr("height", function (d) { return height - y(d.value); })
+          .attr("fill", function (d) {
+            return "rgba(0.5, 1, " + (y(d.value) * 1) + ")";
+          });
+      }
+
+      // Initialize the plot with the first dataset
+      update(distance_data)
+    });
+
+    /*
+    * Time Barplot
+    */
+    d3.csv("data/time_matrix.csv", function (time_data) {
+      console.log(time_data);
+      // set the dimensions and margins of the graph
+      var margin = { top: 30, right: 10, bottom: 70, left: 60 },
+        width = 860 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom;
+
+      // append the svg object to the body of the page
+      var svg = d3.select("#time_plot")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+      // X axis
+      var x = d3.scaleBand()
+        .range([0, width])
+        .domain(time_data.map(function (d) { return d.group; }))
+        .padding(0.3);
+      svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .attr("class", "myaxis")
+        .call(d3.axisBottom(x));
+
+      // Add X axis label:
+      svg.append("text")
+        .attr("text-anchor", "end")
+        .attr("x", width - 325)
+        .attr("y", height + margin.top + 10)
+        .style('fill', 'white')
+        .text("Time of the day [h]");
+
+      // Add Y axis
+      var y = d3.scaleLinear()
+        .domain([0, 80000])
+        .range([height, 0]);
+      svg.append("g")
+        .attr("class", "myaxis")
+        .call(d3.axisLeft(y));
+
+      // Y axis label:
+      svg.append("text")
+        .attr("text-anchor", "end")
+        .attr("transform", "rotate(-90)")
+        .attr("y", - margin.left + 12)
+        .attr("x", - margin.top - 10)
+        .style('fill', 'white')
+        .text("Average duration of the Ride [min]")
+
+      // A function that create / update the plot for a given variable:
+      function update(data) {
+        var u = svg.selectAll("rect")
+          .data(data)
+
+        u
+          .enter()
+          .append("rect")
+          .merge(u)
+          .transition()
+          .duration(1000)
+          .attr("x", function (d) { return x(d.group); })
+          .attr("y", function (d) { return y(d.value); })
+          .attr("width", x.bandwidth())
+          .attr("height", function (d) { return height - y(d.value); })
+          .attr("fill", function (d) {
+            return "rgba(0.5, 1, " + (y(d.value) * 1) + ")";
+          });
+      }
+
+      // Initialize the plot with the first dataset
+      update(time_data)
+    });
+
+
+    /*
+    * Morning Commute Map
+    */
+    d3.csv("data/morning_commute.csv", function (data) {
+      console.log(data)
+      var morning_commute_map = L.mapbox.map('morning_commute_map')
         .setView([38.896653139857385, -77.03485808499167], 12)
         .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10'));
-      map_1
-        .scrollWheelZoom.disable();
+      morning_commute_map
+        .scrollWheelZoom.disable()
 
-      data.forEach(function(row) {
-          row.start_lat = +row.start_lat;
-          row.start_lng = +row.start_lng;
-          var path_options = {
-            radius: 2,
-            color: d3.rgb(3, 252, 3).brighter(),
-            stroke: true,
-            weight: 1,
-          };
-          L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(map_1);
-        }
+      var path_options = {};
+      data.forEach(function (row) {
 
-      );
-
-      var map_2 = L.mapbox.map('map_2')
-        .setView([38.896653139857385, -77.03485808499167], 12)
-        .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10'));
-      map_2
-        .scrollWheelZoom.disable();
-
-      d3.json('https://opendata.arcgis.com/datasets/ead6291a71874bf8ba332d135036fbda_58.geojson', function(error, metro_json) {
-        /* console.log(metro_json) */
-        L.geoJson(metro_json, {
-          style: function(feature) {
-            switch (feature.properties.NAME) {
-              case 'red':
-                return {
-                  color: "#eb4034"
-                };
-              case 'orange':
-                return {
-                  color: "#ffa600"
-                };
-              case 'green':
-                return {
-                  color: "#05f535"
-                };
-              case 'yellow':
-                return {
-                  color: "#f2ff00"
-                };
-              case 'blue':
-                return {
-                  color: "#1c00f2"
-                };
-              case 'silver':
-                return {
-                  color: "#C0C0C0"
-                };
-            }
-          }
-        }).addTo(map_2);
-      })
-
-
-      var heat = L.heatLayer([], {
-        maxZoom: 12,
-        max: 2,
-        radius: 10
-      }).addTo(map_2);
-      data.forEach(function(row) {
         row.start_lat = +row.start_lat;
         row.start_lng = +row.start_lng;
-        heat.addLatLng([row.start_lat, row.start_lng]);
+        row.start_cluster = +row.start_cluster;
+
+        switch (row.start_cluster) {
+          case 0:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(255, 0, 0),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(morning_commute_map);
+            break;
+          case 1:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(26, 255, 255),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(morning_commute_map);
+            break;
+          case 2:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(0, 255, 0),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(morning_commute_map);
+            break;
+          case 3:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(255, 0, 255),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(morning_commute_map);
+            break;
+          case 4:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(0, 255, 153),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(morning_commute_map);
+            break;
+          case 5:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(26, 117, 255),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(morning_commute_map);
+            break;
+          case 6:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(242, 242, 242),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(morning_commute_map);
+            break;
+          case 7:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(255, 255, 0),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(morning_commute_map);
+            break;
+          case 8:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(255, 51, 153),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(morning_commute_map);
+            break;
+          case 9:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(255, 153, 0),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(morning_commute_map);
+            break;
+        }
       });
     });
 
-    d3.csv("data/jan_4_2021.csv", function(data) {
-      /*TODO: Remove Heat and make lines static */
-      var map_3 = L.mapbox.map('map_3')
+    /*
+    * Morning Chord Graph
+    */
+    d3.text("data/morning_commute_matrix.csv", function (data) {
+      var matrix = d3.csvParseRows(data).map(function (row) {
+        return row.map(function (value) {
+          return +value;
+        });
+      });
+      console.log(matrix[0][0])
+      var svg = d3.select("#morning_chord")
+        .append("svg")
+        .attr("width", 440)
+        .attr("height", 440)
+        .append("g")
+        .attr("transform", "translate(220,220)")
+
+      // create a matrix
+
+      // 9 groups, so create a vector of 9 colors
+      var colors = ["rgb(255, 0, 0)", "rgb(26, 255, 255)", "rgb(0, 255, 0)",
+        "rgb(255, 0, 255)", "rgb(0, 255, 153)", "rgb(26, 117, 255)",
+        "rgb(242, 242, 242)", "rgb(255, 255, 0)", "rgb(255, 51, 153)",
+        "rgb(255, 153, 0)"]
+
+      // give this matrix to d3.chord(): it will calculates all the info we need to draw arc and ribbon
+      var res = d3.chord()
+        .padAngle(0.05)
+        .sortSubgroups(d3.descending)
+        (matrix)
+
+      // add the groups on the outer part of the circle
+      svg
+        .datum(res)
+        .append("g")
+        .selectAll("g")
+        .data(function (d) { return d.groups; })
+        .enter()
+        .append("g")
+        .append("path")
+        .style("fill", function (d, i) { return colors[i] })
+        .style("stroke", "black")
+        .attr("d", d3.arc()
+          .innerRadius(200)
+          .outerRadius(210)
+        )
+
+      // Add the links between groups
+      svg
+        .datum(res)
+        .append("g")
+        .selectAll("path")
+        .data(function (d) { return d; })
+        .enter()
+        .append("path")
+        .attr("d", d3.ribbon()
+          .radius(200)
+        )
+        .style("fill", function (d) { return (colors[d.source.index]) }) // colors depend on the source group. Change to target otherwise.
+        .style("stroke", "#8c8c8c");
+    });
+
+    /*
+    * Evening Commute Map
+    */
+    d3.csv("data/evening_commute.csv", function (data) {
+      var evening_commute_map = L.mapbox.map('evening_commute_map')
         .setView([38.896653139857385, -77.03485808499167], 12)
         .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10'));
-      map_3
-        .scrollWheelZoom.disable();
+      evening_commute_map
+        .scrollWheelZoom.disable()
 
-      /* TODO: Get rid of duplicate json read */
-      d3.json('https://opendata.arcgis.com/datasets/ead6291a71874bf8ba332d135036fbda_58.geojson', function(error, metro_json) {
-        /* console.log(metro_json) */
-        L.geoJson(metro_json, {
-          style: function(feature) {
-            switch (feature.properties.NAME) {
-              case 'red':
-                return {
-                  color: "#eb4034"
-                };
-              case 'orange':
-                return {
-                  color: "#ffa600"
-                };
-              case 'green':
-                return {
-                  color: "#05f535"
-                };
-              case 'yellow':
-                return {
-                  color: "#f2ff00"
-                };
-              case 'blue':
-                return {
-                  color: "#1c00f2"
-                };
-              case 'silver':
-                return {
-                  color: "#C0C0C0"
-                };
-            }
-          }
-        }).addTo(map_3);
-      })
+      var path_options = {};
+      data.forEach(function (row) {
 
-      // Transform the short [lat,lng] format in our
-      // data into the {x, y} expected by arc.js.
+        row.start_lat = +row.start_lat;
+        row.start_lng = +row.start_lng;
+        row.start_cluster = +row.start_cluster;
+
+        switch (row.start_cluster) {
+          case 0:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(255, 0, 0),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(evening_commute_map);
+            break;
+          case 1:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(26, 255, 255),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(evening_commute_map);
+            break;
+          case 2:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(0, 255, 0),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(evening_commute_map);
+            break;
+          case 3:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(255, 0, 255),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(evening_commute_map);
+            break;
+          case 4:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(0, 255, 153),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(evening_commute_map);
+            break;
+          case 5:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(26, 117, 255),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(evening_commute_map);
+            break;
+          case 6:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(242, 242, 242),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(evening_commute_map);
+            break;
+          case 7:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(255, 255, 0),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(evening_commute_map);
+            break;
+          case 8:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(255, 51, 153),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(evening_commute_map);
+            break;
+          case 9:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(255, 153, 0),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(evening_commute_map);
+            break;
+        }
+      });
+    });
+
+    /*
+    * Evening Chord Graph
+    */
+    d3.text("data/evening_commute_matrix.csv", function (data) {
+      var matrix = d3.csvParseRows(data).map(function (row) {
+        return row.map(function (value) {
+          return +value;
+        });
+      });
+      console.log(matrix[0][0])
+      var svg = d3.select("#evening_chord")
+        .append("svg")
+        .attr("width", 440)
+        .attr("height", 440)
+        .append("g")
+        .attr("transform", "translate(220,220)")
+
+      // create a matrix
+
+      // 9 groups, so create a vector of 9 colors
+      var colors = ["rgb(255, 0, 0)", "rgb(26, 255, 255)", "rgb(0, 255, 0)",
+        "rgb(255, 0, 255)", "rgb(0, 255, 153)", "rgb(26, 117, 255)",
+        "rgb(242, 242, 242)", "rgb(255, 255, 0)", "rgb(255, 51, 153)",
+        "rgb(255, 153, 0)"]
+
+      // give this matrix to d3.chord(): it will calculates all the info we need to draw arc and ribbon
+      var res = d3.chord()
+        .padAngle(0.05)
+        .sortSubgroups(d3.descending)
+        (matrix)
+
+      // add the groups on the outer part of the circle
+      svg
+        .datum(res)
+        .append("g")
+        .selectAll("g")
+        .data(function (d) { return d.groups; })
+        .enter()
+        .append("g")
+        .append("path")
+        .style("fill", function (d, i) { return colors[i] })
+        .style("stroke", "black")
+        .attr("d", d3.arc()
+          .innerRadius(200)
+          .outerRadius(210)
+        )
+
+      // Add the links between groups
+      svg
+        .datum(res)
+        .append("g")
+        .selectAll("path")
+        .data(function (d) { return d; })
+        .enter()
+        .append("path")
+        .attr("d", d3.ribbon()
+          .radius(200)
+        )
+        .style("fill", function (d) { return (colors[d.source.index]) }) // colors depend on the source group. Change to target otherwise.
+        .style("stroke", "#8c8c8c");
+    });
+
+    /*
+    * After Work Commute Map
+    */
+    d3.csv("data/after_work.csv", function (data) {
+      var after_work_commute_map = L.mapbox.map('after_work_commute_map')
+        .setView([38.896653139857385, -77.03485808499167], 12)
+        .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10'));
+      after_work_commute_map
+        .scrollWheelZoom.disable()
+
+      var path_options = {};
       function obj(ll) {
         return {
           x: ll[1],
@@ -411,54 +763,351 @@
         };
       }
       i = 0;
-      data.forEach(function(row) {
-        try {
-          var generator = new arc.GreatCircle(
-            obj([row.start_lat, row.start_lng]),
-            obj([row.end_lat, row.end_lng])
-          );
-          /*console.log([row.start_lat, row.start_lng]);
-          console.log([row.end_lat, row.end_lng]);*/
-          var line = generator.Arc(100, {
-            offset: 10
-          });
-          // Leaflet expects [lat,lng] arrays, but a lot of
-          // software does the opposite, including arc.js, so
-          // we flip here.
-          /*console.log(line.geometries[0].coords);*/
-          var newLine = L.polyline(line.geometries[0].coords.map(function(c) {
-              return c.reverse();
-            }), {
-              color: '#fff',
+      data.forEach(function (row) {
+
+        row.start_lat = +row.start_lat;
+        row.start_lng = +row.start_lng;
+        row.start_cluster = +row.start_cluster;
+
+        switch (row.start_cluster) {
+          case 0:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(255, 0, 0),
+              stroke: true,
               weight: 1,
-              opacity: 0.5
-            })
-            .addTo(map_3);
-          var totalLength = newLine._path.getTotalLength();
-          newLine._path.classList.add('path-start');
-          // This pair of CSS properties hides the line initially
-          // See http://css-tricks.com/svg-line-animation-works/
-          // for details on this trick.
-          newLine._path.style.strokeDashoffset = totalLength;
-          newLine._path.style.strokeDasharray = totalLength;
-          // Offset the timeout here: setTimeout makes a function
-          // run after a certain number of milliseconds - in this
-          // case we want each flight path to be staggered a bit.
-          setTimeout((function(path) {
-            return function() {
-              // setting the strokeDashoffset to 0 triggers
-              // the animation.
-              path.style.strokeDashoffset = 0;
             };
-          })(newLine._path), i * 100);
-          i++;
-          /*console.log(i);*/
-        } catch (err) {
-          /* TODO: Remove lines causing errors */
-          console.log(err)
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(after_work_commute_map);
+            break;
+          case 1:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(26, 255, 255),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(after_work_commute_map);
+            break;
+          case 2:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(0, 255, 0),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(after_work_commute_map);
+            break;
+          case 3:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(255, 0, 255),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(after_work_commute_map);
+            break;
+          case 4:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(0, 255, 153),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(after_work_commute_map);
+            break;
+          case 5:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(26, 117, 255),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(after_work_commute_map);
+            break;
+          case 6:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(242, 242, 242),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(after_work_commute_map);
+            break;
+          case 7:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(255, 255, 0),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(after_work_commute_map);
+            break;
+          case 8:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(255, 51, 153),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(after_work_commute_map);
+            break;
+          case 9:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(255, 153, 0),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(after_work_commute_map);
+            break;
         }
       });
     });
+
+    /*
+    * After Work Chord Graph
+    */
+    d3.text("data/after_work_matrix.csv", function (data) {
+      var matrix = d3.csvParseRows(data).map(function (row) {
+        return row.map(function (value) {
+          return +value;
+        });
+      });
+      console.log(matrix[0][0])
+      var svg = d3.select("#after_work_chord")
+        .append("svg")
+        .attr("width", 440)
+        .attr("height", 440)
+        .append("g")
+        .attr("transform", "translate(220,220)")
+
+      // create a matrix
+
+      // 9 groups, so create a vector of 9 colors
+      var colors = ["rgb(255, 0, 0)", "rgb(26, 255, 255)", "rgb(0, 255, 0)",
+        "rgb(255, 0, 255)", "rgb(0, 255, 153)", "rgb(26, 117, 255)",
+        "rgb(242, 242, 242)", "rgb(255, 255, 0)", "rgb(255, 51, 153)",
+        "rgb(255, 153, 0)"]
+
+      // give this matrix to d3.chord(): it will calculates all the info we need to draw arc and ribbon
+      var res = d3.chord()
+        .padAngle(0.05)
+        .sortSubgroups(d3.descending)
+        (matrix)
+
+      // add the groups on the outer part of the circle
+      svg
+        .datum(res)
+        .append("g")
+        .selectAll("g")
+        .data(function (d) { return d.groups; })
+        .enter()
+        .append("g")
+        .append("path")
+        .style("fill", function (d, i) { return colors[i] })
+        .style("stroke", "black")
+        .attr("d", d3.arc()
+          .innerRadius(200)
+          .outerRadius(210)
+        )
+
+      // Add the links between groups
+      svg
+        .datum(res)
+        .append("g")
+        .selectAll("path")
+        .data(function (d) { return d; })
+        .enter()
+        .append("path")
+        .attr("d", d3.ribbon()
+          .radius(200)
+        )
+        .style("fill", function (d) { return (colors[d.source.index]) }) // colors depend on the source group. Change to target otherwise.
+        .style("stroke", "#8c8c8c");
+    });
+
+    /*
+    * Weekend Commute Map
+    */
+    d3.csv("data/weekend.csv", function (data) {
+      var weekend_commute_map = L.mapbox.map('weekend_commute_map')
+        .setView([38.896653139857385, -77.03485808499167], 12)
+        .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v10'));
+      weekend_commute_map
+        .scrollWheelZoom.disable()
+
+      var path_options = {};
+      function obj(ll) {
+        return {
+          x: ll[1],
+          y: ll[0]
+        };
+      }
+      i = 0;
+      data.forEach(function (row) {
+
+        row.start_lat = +row.start_lat;
+        row.start_lng = +row.start_lng;
+        row.start_cluster = +row.start_cluster;
+
+        switch (row.start_cluster) {
+          case 0:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(255, 0, 0),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(weekend_commute_map);
+            break;
+          case 1:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(26, 255, 255),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(weekend_commute_map);
+            break;
+          case 2:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(0, 255, 0),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(weekend_commute_map);
+            break;
+          case 3:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(255, 0, 255),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(weekend_commute_map);
+            break;
+          case 4:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(0, 255, 153),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(weekend_commute_map);
+            break;
+          case 5:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(26, 117, 255),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(weekend_commute_map);
+            break;
+          case 6:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(242, 242, 242),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(weekend_commute_map);
+            break;
+          case 7:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(255, 255, 0),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(weekend_commute_map);
+            break;
+          case 8:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(255, 51, 153),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(weekend_commute_map);
+            break;
+          case 9:
+            path_options = {
+              radius: 2,
+              color: d3.rgb(255, 153, 0),
+              stroke: true,
+              weight: 1,
+            };
+            L.circleMarker([row.start_lat, row.start_lng], path_options).addTo(weekend_commute_map);
+            break;
+        }
+      });
+    });
+
+    /*
+    * Weekend Chord Graph
+    */
+    d3.text("data/weekend_matrix.csv", function (data) {
+      var matrix = d3.csvParseRows(data).map(function (row) {
+        return row.map(function (value) {
+          return +value;
+        });
+      });
+      console.log(matrix[0][0])
+      var svg = d3.select("#weekend_chord")
+        .append("svg")
+        .attr("width", 440)
+        .attr("height", 440)
+        .append("g")
+        .attr("transform", "translate(220,220)")
+
+      // create a matrix
+
+      // 9 groups, so create a vector of 9 colors
+      var colors = ["rgb(255, 0, 0)", "rgb(26, 255, 255)", "rgb(0, 255, 0)",
+        "rgb(255, 0, 255)", "rgb(0, 255, 153)", "rgb(26, 117, 255)",
+        "rgb(242, 242, 242)", "rgb(255, 255, 0)", "rgb(255, 51, 153)",
+        "rgb(255, 153, 0)"]
+
+      // give this matrix to d3.chord(): it will calculates all the info we need to draw arc and ribbon
+      var res = d3.chord()
+        .padAngle(0.05)
+        .sortSubgroups(d3.descending)
+        (matrix)
+
+      // add the groups on the outer part of the circle
+      svg
+        .datum(res)
+        .append("g")
+        .selectAll("g")
+        .data(function (d) { return d.groups; })
+        .enter()
+        .append("g")
+        .append("path")
+        .style("fill", function (d, i) { return colors[i] })
+        .style("stroke", "black")
+        .attr("d", d3.arc()
+          .innerRadius(200)
+          .outerRadius(210)
+        )
+
+      // Add the links between groups
+      svg
+        .datum(res)
+        .append("g")
+        .selectAll("path")
+        .data(function (d) { return d; })
+        .enter()
+        .append("path")
+        .attr("d", d3.ribbon()
+          .radius(200)
+        )
+        .style("fill", function (d) { return (colors[d.source.index]) }) // colors depend on the source group. Change to target otherwise.
+        .style("stroke", "#8c8c8c");
+    });
+
+
   </script>
 
 
