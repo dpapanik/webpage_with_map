@@ -27,8 +27,8 @@
     #evening_commute_map,
     #after_work_commute_map,
     #weekend_commute_map {
-    height: 500px;
-  }
+      height: 500px;
+    }
 
     /*
  * The path-start class is added to each line
@@ -139,25 +139,25 @@
       </p>
     </div>
     <div class="two columns">
-      <a href="https://urbansynergeticslab.net/"><img class="scale-with-grid" src="img/img_1600/usl_logo_white_transparent.png"
-          style="background-color:#121212"></a>
+      <a href="https://urbansynergeticslab.net/"><img class="scale-with-grid"
+          src="img/img_1600/usl_logo_white_transparent.png" style="background-color:#121212"></a>
     </div>
     <div class="twelve columns">
       <h3>Introduction</h3>
       <p>
-        This webpage is providing visualized information about the bike sharing system in Washington
-        DC. Capital Bikeshare is the provider of the bike-sharing service in the city. It currently owns
-        4500+ bikes and 596 stations across 7 jurisdictions in the US. The data was captured from its
-        website <a href="https://www.capitalbikeshare.com"> https://www.capitalbikeshare.com</a>.The data includes
-        several layers of information such
-        as: the bike ID, time and location of the start and the end of each ride, the user’s membership
-        condition(member or casual), and the bike type(electric, classic, or docked).
-        By analyzing and visualizing those data, we are trying to answer questions such as: How the
-        demand for bikes in DC changes during a normal weekday on an hourly basis; From where
-        most bike rides usually start; What destination the bike users are usually travelling to. The final
-        goal of this analysis is to assess the overall performance of the sharing bike system in
-        Washington DC, and propose possible solutions to improve the efficiency of the whole system
-        so as to enhance users experience.
+
+        The webpage presents the Visualized Data on the bike sharing system in Washington DC.
+        Capital Bike share is the mainstay for the bike sharing service in the city with more than
+        4500 bikes and 596 stations across the metro region of Washington,DC. The data was
+        obtained from the website of Capitalbike share a href="https://www.capitalbikeshare.com">
+        https://www.capitalbikeshare.com</a>. The
+        Data incorporate several layers of information for instance : the bike IDs, time and locations
+        Of the start and end of each trip. Duration of the trip, Users membership condition ( member
+        or casual), and the bike type( electric, classic or docked).By analyzing and visualizing the
+        data we are trying to answer the following questions : How the time impacts the length of
+        the ride during the weekdays and the weekends in Washington DC,How do the time impact
+        the start and end locations,and propose possible solutions to improve the efficiency of the
+        Bike share system and elevate user experience.
       </p>
     </div>
   </div>
@@ -168,12 +168,19 @@
       <!-- Create Barplot -->
       <div id="distance_plot"></div>
       <div id="time_plot"></div>
-      <p>
-        ...
-      </p>
       <h4>
         Findings
       </h4>
+      <p>
+        The two peaks of total distance of ride in the fist graph indicates that the high
+        usage of sharing bikes occurs around 7- 8 am and 3-6 pm. Since the second peak is
+        significantly higher than the morning peak. It suggests that people tend to use bikes
+        for travelling in the afternoon. The second graph has a similar profile to the first one
+        except for at 1 pm, which means that the bike travelling speed doesn’t change a lot
+        for the most part of the day. Considering the oscillation of traffic volume, the drastic
+        increase of the duration of rides at 1 pm maybe the result of heavy traffic condition
+        during the rush hour.
+      </p>
     </div>
   </div>
 
@@ -181,12 +188,17 @@
   <div class="container one-bottom">
     <div class="twelve columns">
       <h3>How does time impact start/end locations?</h3>
-      <p>We are visualizing the flow of bike travel in the city by classifying the trip endpoints into clusters and mapping the flow of bike traffic between the clusters. 
-        The clusters were used in order to reduce the dimensionality of the data visualizations and they were created using a k-means algorithm.  
-        We used k-means because it would group similar points together and form local clusters in different regions of Washington DC.  
-        We had k-means compute ten clusters and we used the latitude and longitude points of the trip start and end locations.  
-        Once the clusters were created, we mapped the start locations to the maps below and color coordinated the start point to their cluster.  
-        The accompanying chord graph shows the flow of traffic between the clusters.  
+      <p>We are visualizing the flow of bike travel in the city by classifying the trip endpoints into clusters and
+        mapping the flow of bike traffic between the clusters.
+        The clusters were used in order to reduce the dimensionality of the data visualizations and they were created
+        using a k-means algorithm.
+        We used k-means because it would group similar points together and form local clusters in different regions of
+        Washington DC.
+        We had k-means compute ten clusters and we used the latitude and longitude points of the trip start and end
+        locations.
+        Once the clusters were created, we mapped the start locations to the maps below and color coordinated the start
+        point to their cluster.
+        The accompanying chord graph shows the flow of traffic between the clusters.
         <br><br>
         <b>Legend: </b><br>
       </p>
@@ -211,12 +223,25 @@
         <div id="morning_chord" class="six columns"></div>
       </div>
       <br>
+      <p>
+        Most of the trips were made from the northwest Washington including Columbia
+        Heights neighborhood. The trip destinations were mainly the northwest Washington, the downtown area, and the
+        Capitol Hill area. There are also some riders (small proportion) that commute from the Capital Hill area
+        to the Washington city center. And others that travel from the Capital Hill to the
+        Georgetown neighborhood.
+      </p>
+      <br>
       <h4>Evening Commute</h4>
       <p>Weekdays 5pm-8pm</p>
       <div class="row">
         <div id="evening_commute_map" class="six columns"></div>
         <div id="evening_chord" class="six columns"></div>
       </div>
+      <br>
+      <p>
+        In the evening most trips are either within the same clusters (neighborhoods) or from
+        downtown, Georgetown, Capital Hill neighborhoods to Northwest Washington, D.C..
+      </p>
       <br>
       <h4>After Work Hours</h4>
       <p>Weekdays 8pm-2am the following day</p>
@@ -225,12 +250,25 @@
         <div id="after_work_chord" class="six columns"></div>
       </div>
       <br>
+      <p>
+        The overall number of trips went down and most of the trips were on Friday night.
+        Most riders commute within the same neighborhoods. Late riders are mostly in the Northwest Washington including
+        Columbia Heights neighborhood.
+        Some late riders travel from the Georgetown neighborhood to the Northwest Washington.
+      </p>
+      <br>
       <h4>Weekend</h4>
       <p>All hours on the weekend</p>
       <div class="row">
         <div id="weekend_commute_map" class="six columns"></div>
         <div id="weekend_chord" class="six columns"></div>
       </div>
+      <br>
+      <p>
+        Most of the riders commute from the Northwest Washington with a considerable
+        proportion of trips within the neighborhood. Most of destinations are located in the city center and the Capital
+        Hill neighborhood.
+      </p>
     </div>
   </div>
 
@@ -238,7 +276,14 @@
     <div class="twelve columns">
       <h3>Conclusion</h3>
       <p>
-        Add Conclusion!
+        To conclude, the analysis explores the Bike sharing system visualized in Washington DC
+        focusing on the two questions: how time impacts the length of ride and how time impacts
+        the start/end locations analyzing using BarPlots, Maps and Chord Graphs. Our
+        visualizations are helpful in presenting interesting insights from the data of capital Bikeshare
+        such as specific time frames have higher usage of the sharing bikes during the day and the
+        flow of the bike traffic between the clusters in particular time frames. Further, we hope to
+        enrich our analysis with new findings and visualizations to bring out better solutions to
+        increase the use of shared bikes in the Washington, DC.
       </p>
     </div>
   </div>
@@ -246,15 +291,14 @@
   <div class="container one-bottom">
     <h3>Team & Contributions</h3>
     <h4>Eric Helfrich</h4>
-    <p>Edited the HTML/CSS/Javascript and developed the mapbox visualizations. Edited the descriptions and cleaned data
+    <p>Edited the HTML/CSS/Javascript and wrote the python code to clean the data.
       for use JavaScript.</p>
     <h4>Ling Xu</h4>
-    <p>Introduction and page layout ideas</p>
+    <p>Analyzed the barplot findings and made corrections to the plots.</p>
     <h4>Panick Kalambay Ilunga</h4>
-    <p>clean and made the statistical computing & graphics (bar plots), edited the HTML JavaScript related to that
-      section, and came up with some future questions we may address.</p>
+    <p>Wrote the initial code for the D3 barplots and wrote the findings for the chord graphs</p>
     <h4>Khyati Patel</h4>
-    <p>Description to maps, conclusion, and page layout ideas.</p>
+    <p>Helped with the chord graphs and wrote the introduction and conclusion</p>
   </div>
 
 
