@@ -181,27 +181,52 @@
   <div class="container one-bottom">
     <div class="twelve columns">
       <h3>How does time impact start/end locations?</h3>
-      <p>Legend: ...</p>
+      <p>We are visualizing the flow of bike travel in the city by classifying the trip endpoints into clusters and mapping the flow of bike traffic between the clusters. 
+        The clusters were used in order to reduce the dimensionality of the data visualizations and they were created using a k-means algorithm.  
+        We used k-means because it would group similar points together and form local clusters in different regions of Washington DC.  
+        We had k-means compute ten clusters and we used the latitude and longitude points of the trip start and end locations.  
+        Once the clusters were created, we mapped the start locations to the maps below and color coordinated the start point to their cluster.  
+        The accompanying chord graph shows the flow of traffic between the clusters.  
+        <br><br>
+        <b>Legend: </b><br>
+      </p>
+      <table style="width:100%">
+        <tr>
+          <td><span style="background-color: rgb(255, 0, 0)">Cluster 0</span></td>
+          <td><span style="background-color: rgb(26, 255, 255)">Cluster 1</span></td>
+          <td><span style="background-color: rgb(0, 255, 0)">Cluster 2</span></td>
+          <td><span style="background-color: rgb(255, 0, 255)">Cluster 3</span></td>
+          <td><span style="background-color: rgb(0, 255, 153)">Cluster 4</span></td>
+          <td><span style="background-color: rgb(26, 117, 255)">Cluster 5</span></td>
+          <td><span style="background-color: rgb(242, 242, 242)">Cluster 6</span></td>
+          <td><span style="background-color: rgb(255, 255, 0)">Cluster 7</span></td>
+          <td><span style="background-color: rgb(255, 51, 153)">Cluster 8</span></td>
+          <td><span style="background-color: rgb(255, 153, 0)">Cluster 9</span></td>
+        </tr>
+      </table>
       <h4>Morning Commute</h4>
-      <p>Text about how data was found</p>
+      <p>Weekdays 6am-10am</p>
       <div class="row">
         <div id="morning_commute_map" class="six columns"></div>
         <div id="morning_chord" class="six columns"></div>
       </div>
       <br>
       <h4>Evening Commute</h4>
+      <p>Weekdays 5pm-8pm</p>
       <div class="row">
         <div id="evening_commute_map" class="six columns"></div>
         <div id="evening_chord" class="six columns"></div>
       </div>
       <br>
       <h4>After Work Hours</h4>
+      <p>Weekdays 8pm-2am the following day</p>
       <div class="row">
         <div id="after_work_commute_map" class="six columns"></div>
         <div id="after_work_chord" class="six columns"></div>
       </div>
       <br>
       <h4>Weekend</h4>
+      <p>All hours on the weekend</p>
       <div class="row">
         <div id="weekend_commute_map" class="six columns"></div>
         <div id="weekend_chord" class="six columns"></div>
@@ -291,7 +316,7 @@
         .attr("y", - margin.left + 11)
         .attr("x", - margin.top - 10)
         .style('fill', 'white')
-        .text("Average distance of the Ride [km]");
+        .text("Total distance of bike rides [km]");
 
       // A function that create / update the plot for a given variable:
       function update(data) {
@@ -309,7 +334,8 @@
           .attr("width", x.bandwidth())
           .attr("height", function (d) { return height - y(d.value); })
           .attr("fill", function (d) {
-            return "rgba(0.5, 1, " + (y(d.value) * 1) + ")";
+            // return "rgba(0.5, 1, " + (y(d.value) * .5) + ")";
+            return "rgba(" + (y(d.value) * .7) + ", 1, 1)";
           });
       }
 
@@ -369,7 +395,7 @@
         .attr("y", - margin.left + 12)
         .attr("x", - margin.top - 10)
         .style('fill', 'white')
-        .text("Average duration of the Ride [min]")
+        .text("Total duration of the ride [min]")
 
       // A function that create / update the plot for a given variable:
       function update(data) {
@@ -387,7 +413,7 @@
           .attr("width", x.bandwidth())
           .attr("height", function (d) { return height - y(d.value); })
           .attr("fill", function (d) {
-            return "rgba(0.5, 1, " + (y(d.value) * 1) + ")";
+            return "rgba(0.5, 1, " + (y(d.value) * 1.2) + ")";
           });
       }
 
