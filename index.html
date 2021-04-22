@@ -23,10 +23,13 @@
   <script src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
   <link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
   <style>
-    #morning_commute_map,
-    #evening_commute_map,
-    #after_work_commute_map,
-    #weekend_commute_map {
+    #member_start_map,
+    #member_end_map,
+    #casual_start_map,
+    #casual_end_map,
+    #land_use_map,
+    #member_chord,
+    #casual_chord {
       height: 500px;
     }
 
@@ -155,7 +158,8 @@
   <div class="container one-bottom">
     <div class="twelve columns">
       <h3>How does rider membership impact the use of the bike share system for commuting and non-commuting?</h3>
-      <!-- TODO: Layered Histogram -->
+      <div id="distance_plot"></div>
+      <div id="time_plot"></div>
       <h4>
         Findings
       </h4>
@@ -169,59 +173,110 @@
   <div class="container one-bottom">
     <div class="twelve columns">
       <h3>How do commuting patterns change based on membership?</h3>
-      <!-- TODO: Choose Visulization -->
-      <h4>
-        Findings
-      </h4>
-    </div>
-  </div>>
+      <!-- TODO: Heat Visulization -->
+      <button onclick="update_heat('morning')">Morning Coummute</button>
+      <button onclick="update_heat('evening')">Evening Commute</button>
+      <h4>Start Locations</h4>
+      <div class="row">
+        <div class="six columns">
+          <h5>Member</h5>
+          <div id="member_start_map"></div>
+        </div>
+        <div class="six columns">
+          <h5>Casual</h5>
+          <div id="casual_start_map"></div>
+        </div>
+      </div>
+      <div class="row">
+        <br>
+        <h4>End Locations </h4>
+        <div class="row">
+          <div class="six columns">
+            <h5>Member</h5>
+            <div id="member_end_map"></div>
+          </div>
+          <div class="six columns">
+            <h5>Casual</h5>
+            <div id="casual_end_map"></div>
+          </div>
+        </div>
+        <br>
+        <h4>
+          Findings
+        </h4>
+      </div>>
 
 
-  <div class="container one-bottom">
-    <div class="twelve columns">
-      <h3>Does membership change the area that users start their rides?</h3>
-      <!-- TODO: Choose Visulization -->
-      <h4>
-        Findings
-      </h4>
-    </div>
-  </div>
+      <div class="container one-bottom">
+        <div class="twelve columns">
+          <h3>Does membership change the area that users start their rides?</h3>
+          <!-- TODO: Choose Visulization -->
+          <h5>Land Use Categories: </h5>
+          </p>
+          <table style="width:100%">
+            <tr>
+              <td><span style="background-color: rgb(255, 0, 0)">Commercial</span></td>
+              <td><span style="background-color: rgb(26, 255, 255)">Mix Used</span></td>
+              <td><span style="background-color: rgb(0, 255, 0)">National Mall</span></td>
+              <td><span style="background-color: rgb(255, 0, 255)">Open_Air</span></td>
+              <td><span style="background-color: rgb(255, 255, 0)">Residential</span></td>
+            </tr>
+          </table>
+          <br>
+          <div id="land_use_map"></div>
+          <div class="row">
+            <div class="six columns">
+              <h4>Members</h4>
+              <div id="member_chord"></div>
+            </div>
+            <div class="six columns">
+              <h4>Casual</h4>
+              <div id="casual_chord"></div>
+            </div>
+          </div>
+          <h4>
+            Findings
+          </h4>
+        </div>
+      </div>
 
 
-  <div class="container one-bottom">
-    <div class="twelve columns">
-      <h3>Conclusion</h3>
-      <p>
-        ...
-      </p>
-    </div>
-  </div>
+      <div class="container one-bottom">
+        <div class="twelve columns">
+          <h3>Conclusion</h3>
+          <p>
+            ...
+          </p>
+        </div>
+      </div>
 
-  <!-- List group contributions -->
-  <div class="container one-bottom">
-    <h4>Team & Contributions</h4>
-    <h5>Eric Helfrich</h5>
-    <p>...</p>
-    <h5>Ling Xu</h5>
-    <p>...</p>
-    <h5>Panick Kalambay Ilunga</h5>
-    <p>...</p>
-    <h5>Khyati Patel</h5>
-    <p>...</p>
-  </div>
-
-
-
-  <script src="js/sample.js" type="text/javascript"></script>
-  <script>
-
-    L.mapbox.accessToken = 'pk.eyJ1IjoiZWhlbGZyaWNoIiwiYSI6ImNra3Zhcmg5MDF1a3YycW55bmttcXA5NWEifQ.A1pr7k28x6Tf3--cUny6tA';
-
-    
+      <!-- List group contributions -->
+      <div class="container one-bottom">
+        <h4>Team & Contributions</h4>
+        <h5>Eric Helfrich</h5>
+        <p>...</p>
+        <h5>Ling Xu</h5>
+        <p>...</p>
+        <h5>Panick Kalambay Ilunga</h5>
+        <p>...</p>
+        <h5>Khyati Patel</h5>
+        <p>...</p>
+      </div>
 
 
 
-  </script>
+      <script src="js/ridership_histogram.js" type="text/javascript"></script>
+      <script src="js/commuting_patterns.js" type="text/javascript"></script>
+      <script src="js/landuse.js" type="text/javascript"></script>
+      <script>
+
+
+
+
+
+
+
+      </script>
 
 
 </body>
