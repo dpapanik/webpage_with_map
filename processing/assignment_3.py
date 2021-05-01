@@ -179,16 +179,8 @@ if __name__ == "__main__":
         df_2021['end_land_cluster'] = df_2021.apply(
             lambda x: geojson_check(land_json=js, point=Point(x['end_lng'], x['end_lat'])), axis=1)
 
-        # Add Zone for Null Land Use
-        df_2021['start_land_cluster'] = df_2021.start_land_cluster.fillna(
-            'Open_Air')
-        df_2021['end_land_cluster'] = df_2021.end_land_cluster.fillna(
-            'Open_Air')
-
     # Drop Non DC Trips
-    tmpdf = df_2021.head(100)
-    tmpdf['dc_only'] = tmpdf.apply(lambda x: check_outside_dc(
-        x['start_lat'], x['start_lng']), axis=1)
+    df_2021 = df_2021.dropna(subset=['start_land_cluster', 'end_land_cluster'])
 
     # Create Member and Casual Clusters for Question #3
     legend = pd.DataFrame(sorted(df_2021.start_land_cluster.unique()))
