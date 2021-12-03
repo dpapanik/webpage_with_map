@@ -4,7 +4,7 @@
 
   <!-- Basic Page Needs–– -->
   <meta charset="utf-8">
-  <title>Your Project Title</title>
+  <title>Flocking Example</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -19,16 +19,12 @@
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/skeleton.css">
   <link rel="stylesheet" href="css/customize.css">
-  <script src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
-  <link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
   <style>
   #map_1,#map_2,#map_3 {
     height: 500px;
   }
   </style>
 
-  <!-- D3 -->
-  <script src="https://d3js.org/d3.v4.min.js"></script>
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/favicon.png">
@@ -36,12 +32,10 @@
 </head>
 <body>
 
-  <div class="container one-bottom" style="margin-top: 50px">
+  <div class="container half-bottom" style="margin-top: 50px">
     <div class="ten columns">
-      <h2>Mobility on Demand Systems: Data-Driven Analysis, Simulation, Visualization</h2>
+      <h2>Autonomous Agents and Self-Organization</h2>
       <p>
-        ARCH 6306/6050, DSBA 6010, ITIS 8010/6010: Wednesdays 6pm-8:30pm, Taught Online
-        <br>
         Dr. Dimitris Papanikolaou | dpapanik@uncc.edu | Urban Synergetics Lab | https://urbansynergeticslab.net
       </p>
     </div>
@@ -50,150 +44,54 @@
     </div>
   </div>
 
+<div id="sketch-holder" class="half-bottom" style="background-image: url('img/sky.jpg')">
+</div>
+
+<div class="container half-bottom" >
+  <h3>Controls</h3>
+  <div class="row">
+    <div class="six columns" id="sliders_1" >
+      <div id="sliderAlignment">Alignment</div>
+      <div id="sliderCohesion">Cohesion</div>
+      <div id="sliderSeparation">Separation</div>
+    </div>
+    <div class="six columns" id="sliders_1" >
+      <div id="sliderMaxSpeed">max Speed</div>
+      <div id="sliderMaxForce">max Force</div>
+      <div id="sliderPerceptionRadius">Perception Radius</div>
+    </div>
+  </div>  
+</div>
+
+
 
   <div class="container one-bottom" style="margin-top: 50px">
+
     <div class="twelve columns">
-      <h3>Making an interactive map and plotting data on it</h3>
-      <h5>Use this template for your assignments in the class. This example uses <a href="https://docs.mapbox.com/mapbox.js/api/v3.3.1/">MapBox.js v3.3.1</a> and <a href="http://getskeleton.com/">Skeleton</a> boilerplate </h5>
+      <h3>Flocking Example</h3>
+      <h5>A boid's neighborhood</h5>
+      <p>Each boid has direct access to the whole scene's geometric description, but flocking requires that it reacts only to flock mates within a certain small neighborhood around itself. The neighborhood is characterized by:
+      a distance (measured from the center of the boid) and an angle,measured from the boid's direction of flight. Flock mates outside this local neighborhood are ignored</p>
     </div>
   </div>
-
-  <div class="container one-bottom" >
-    <div class="twelve columns">
-      <h3>Example 1: Simple Map</h3>
-      <h5>
-        This example shows how to create a map using Leaflet.js and MapBox.js, and center the map at a specified pair of lat/long coordinates.
-      </h5>
-    </div>
-  </div>
-
-  <div id="map_1" class="one-bottom"></div>
-
-
-  <div class="container one-bottom" >
-    <div class="twelve columns">
-      <h3>Example 2: Map with displayed locations of stations from a dataset</h3>
-      <h5>
-        This example shows how to create a map using Leaflet.js/MapBox.js, and then plot a set of circles at the locations of the stations.
-      </h5>
-    </div>
-  </div>
-
-  <div id="map_2" class="one-bottom"></div>
-
-
-  <div class="container one-bottom" >
-    <div class="twelve columns">
-      <h3>Example 3: Map with locations of stations with sizes proportional to their accumulation levels</h3>
-      <h5>
-        This example shows how to create a map using Leaflet.js/MapBox.js, plot a set of circles at the locations of the stations, and adjusts their diameters to be proportional to the inventory levels of the stations.
-      </h5>
-    </div>
-  </div>
-
-
-  <div id="map_3" class="one-bottom"></div>
-
-
-  <div class="container one-bottom" >
-    <h3>Below is an array of images organized into rows and collumns</h3>
-  </div>
+  
 
   <div class="container one-bottom" >
     <div class="row">
-      <img class="four columns scale-with-grid quarter-bottom-rel" src="img/img_640/640x480.jpg">
-      <img class="four columns scale-with-grid quarter-bottom-rel" src="img/img_640/640x480.jpg">
-      <img class="four columns scale-with-grid quarter-bottom-rel" src="img/img_640/640x480.jpg">
-    </div>
-    <div class="row">
-      <img class="four columns scale-with-grid quarter-bottom-rel" src="img/img_640/640x480.jpg">
-      <img class="four columns scale-with-grid quarter-bottom-rel" src="img/img_640/640x480.jpg">
-      <img class="four columns scale-with-grid quarter-bottom-rel" src="img/img_640/640x480.jpg">
     </div>
   </div>
 
-  <div class="container one-bottom" >
-    <h2>This is Heading 2</h2>
-    <h3>This is Heading 3</h3>
-    <h4>This is Heading 4</h4>
-    <h5>This is Heading 5</h5>
-    <p>This is paragraph text p</p>
-  </div>
+
 
   <div class="container one-bottom" >
-    <h2>Team & Contributions</h2>
-    <h5>Be very clear about how each student in your team contributed to this project</h5>
-    <h3>Student A</h3>
-    <h5>Student A contributed to this, this, and that.</h5>
-    <h3>Student B</h3>
-    <h5>Student B contributed to this, this, and that.</h5>
-    <h3>Student C</h3>
-    <h5>Student C contributed to this, this, and that.</h5>
+    <h2>References</h2>
   </div>
 
 
 
-  <script>
-
-  L.mapbox.accessToken = 'pk.eyJ1IjoiZGltcCIsImEiOiJkRnlra3RjIn0.E9CTYzNUEx0yb3dcfV4SiA';
-
-  var map_1 = L.mapbox.map('map_1')
-  .setView([40, -74.50], 9)
-  .addLayer(L.mapbox.styleLayer('mapbox://styles/dimp/citf6n01300692hmlxnnrv6wd'));
-  map_1
-  .scrollWheelZoom.disable();
-
-
-  d3.json("https://api.citybik.es/v2/networks/ford-gobike", function(data) {
-    console.log(data);
-
-    var map_2 = L.mapbox.map('map_2')
-    .setView([data.network.location.latitude, data.network.location.longitude], 10)
-    .addLayer(L.mapbox.styleLayer('mapbox://styles/dimp/citf6n01300692hmlxnnrv6wd'));
-    map_2
-    .scrollWheelZoom.disable();
-
-    data.network.stations.forEach(function(station){
-      station.lat = +station.latitude;
-      station.lng = +station.longitude;
-      var path_options = {
-        radius :  2,
-        color : d3.rgb(88,206,227).brighter(),
-        stroke: true,
-        weight : 1,
-      };
-      L.circleMarker([station.latitude, station.longitude], path_options).addTo(map_2);
-    });
-
-    var map_3 = L.mapbox.map('map_3')
-    .setView([data.network.location.latitude, data.network.location.longitude], 11)
-    .addLayer(L.mapbox.styleLayer('mapbox://styles/dimp/ck9mf0x8q3o521iojo2qmmp52'));
-    map_3
-    .scrollWheelZoom.disable();
-
-    data.network.stations.forEach(function(station){
-      station.lat = +station.latitude;
-      station.lng = +station.longitude;
-      var inventory_level = station.free_bikes / (station.free_bikes+station.empty_slots);
-      var path_options = {
-        radius :  0.14 * (station.free_bikes + station.empty_slots),
-        color : d3.rgb(88,206,227).brighter(),
-        fillColor : (function(){
-          return inventory_level > 0.5? d3.rgb(88,206,227) : d3.rgb(88,206,227).darker(2)
-        })(),
-        stroke: true,
-        weight : 1,
-        opacity : 1,
-        fillOpacity : 0.8
-      };
-      L.circleMarker([station.latitude, station.longitude], path_options).addTo(map_3);
-    });
-  });
-
-
-
-
-  </script>
+  <script src="js/p5.js"></script>
+  <script src="js/sketch.js"></script>
+  <script src="js/boid.js"></script>
 
 
 </body>
